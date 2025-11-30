@@ -25,8 +25,8 @@ export default function Hero() {
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-4">
             Digitalización y automatización con IA aplicada
-            <br />
-            para PYMES que ya crecieron y necesitan orden.
+            
+            para PYMES 
           </h1>
           <p className="text-sm md:text-base text-slate-100/90 max-w-xl mb-6">
             Digitalizamos y automatizamos tus formularios en papel, WhatsApp y
