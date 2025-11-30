@@ -3,17 +3,17 @@
 import { motion } from "framer-motion";
 
 const services = [
- {
-  title: "Digitalización de procesos y datos",
-  description:
-    "Tomamos formularios en papel, checklists, guías de trabajo y reportes manuales y los convertimos en flujos digitales listos para automatizar. Cuando hace sentido, lo organizamos en una capa tipo ERP-lite.",
-  tags: ["Digitalización", "Mapeo de procesos", "ERP-lite cuando hace falta"],
-},
+  {
+    title: "Digitalización de procesos y datos",
+    description:
+      "Tomamos formularios en papel, checklists, guías de trabajo y reportes manuales y los convertimos en flujos digitales listos para automatizar y aplicar inteligencia artificial (clasificación, búsqueda, resúmenes). Cuando hace sentido, lo organizamos en una capa tipo ERP-lite.",
+    tags: ["Digitalización", "Mapeo de procesos", "Listo para IA"],
+  },
   {
     title: "Chatbots de WhatsApp inteligentes",
     description:
-      "Bots que reciben fotos y datos, aplican OCR, actualizan formularios y responden dudas internas tipo 'pregúntale a la empresa'.",
-    tags: ["WhatsApp", "OCR", "RAG interno"],
+      "Bots con IA que entienden lenguaje natural, reciben fotos y datos, aplican OCR, actualizan formularios y consultan tu base de conocimiento interna tipo “pregúntale a la empresa” (RAG).",
+    tags: ["IA", "WhatsApp", "OCR", "RAG interno"],
   },
   {
     title: "Integraciones y RPA",
@@ -45,6 +45,12 @@ const services = [
       "Sistema de puntos, cupones, gift cards y campañas con QR/NFC + WhatsApp. Mini CRM de recurrencia para tus mejores clientes.",
     tags: ["Lealtad", "QR/NFC", "Campañas"],
   },
+  {
+    title: "IA aplicada a tu operación",
+    description:
+      "Usamos modelos de inteligencia artificial para responder preguntas sobre tus procesos, resumir información clave, clasificar tickets y apoyar la toma de decisiones sobre tus datos operativos.",
+    tags: ["IA", "Asistentes internos", "Clasificación automática"],
+  },
 ];
 
 export default function Services() {
@@ -62,7 +68,8 @@ export default function Services() {
               Lo que hacemos en FUTURA
             </h2>
             <p className="text-sm md:text-base text-slate-600 max-w-xl">
-              No vendemos un software genérico. Diseñamos sistemas concretos
+              No vendemos un software genérico. Diseñamos sistemas concretos de
+              digitalización, automatización e inteligencia artificial aplicada
               para que tu operación funcione mejor, se mida mejor y dependa
               menos de tareas manuales.
             </p>
