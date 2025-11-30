@@ -15,7 +15,7 @@ export default function Problem() {
       >
         <div>
           <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-3">
-            Si todo está en Excel y WhatsApp,
+            Si todo está en papel, Excel y WhatsApp,
             <br />
             ya no estás creciendo: estás sobreviviendo.
           </h2>
