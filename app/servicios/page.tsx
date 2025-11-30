@@ -8,11 +8,13 @@ export default function ServiciosPage() {
         <h1 className="text-3xl md:text-4xl font-semibold text-[#362263] mb-4">
           Servicios FUTURA
         </h1>
-        <p className="text-slate-600 max-w-2xl">
-          Construimos sistemas ERP-lite, bots de WhatsApp, integraciones y
-          dashboards para que tu PYME opere como una gran empresa sin comprar
-          un ERP gigante.
-        </p>
+       <p className="text-slate-600 max-w-2xl">
+  Construimos sistemas de digitalización y automatización, bots de
+  WhatsApp, integraciones y dashboards para que tu PYME opere como una
+  gran empresa. Cuando es necesario, lo ordenamos todo en una capa
+  tipo ERP-lite, sin amarrarte a un software gigante.
+</p>
+
       </section>
       <Services />
       <CTASection />
