@@ -6,12 +6,16 @@ import { FiChevronDown } from "react-icons/fi";
 
 const faqs = [
   {
+    q: "¿Cómo usan inteligencia artificial en los proyectos?",
+    a: "La IA no es un adorno: la usamos donde realmente suma valor. Por ejemplo, en bots que entienden lenguaje natural, asistentes internos que responden sobre tus procesos (RAG), clasificación automática de tickets y priorización, resúmenes de información clave y sugerencias basadas en tus datos operativos.",
+  },
+  {
     q: "¿Cuánto tarda una implementación típica?",
-    a: "Depende del alcance, pero un primer módulo funcional (por ejemplo inventarios + ventas) suele estar listo en semanas, no en meses. Trabajamos por sprints para que veas resultados rápido.",
+    a: "Depende del alcance, pero un primer módulo funcional (por ejemplo digitalización de un proceso clave + automatización básica) suele estar listo en semanas, no en meses. Trabajamos por sprints para que veas resultados rápido.",
   },
   {
     q: "¿Necesito abandonar todo lo que uso hoy?",
-    a: "No. Partimos de tus herramientas actuales (Google, WhatsApp, sistemas de facturación, etc.) y construimos alrededor. El objetivo es ordenar y conectar, no romper lo que ya funciona.",
+    a: "No. Partimos de tus herramientas actuales (papel, PDFs, Google, WhatsApp, sistemas de facturación, etc.) y construimos alrededor. El objetivo es ordenar, digitalizar y conectar, no romper lo que ya funciona. La inteligencia artificial se conecta a ese ecosistema, no lo reemplaza.",
   },
   {
     q: "¿Qué tamaño mínimo de empresa atienden?",
