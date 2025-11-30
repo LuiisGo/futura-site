@@ -29,10 +29,11 @@ export default function Hero() {
             que ya crecieron y necesitan orden.
           </h1>
           <p className="text-sm md:text-base text-slate-100/90 max-w-xl mb-6">
-            Conectamos tus Excel, WhatsApp y sistemas dispersos en un ERP-lite
-            simple, automatizado y medible. Menos caos, más control, más tiempo
-            para vivir.
-          </p>
+  Digitalizamos y automatizamos tu negocio, no mas papel y excels complicados o tardados, optimizamos con
+  sistemas dispersos en flujos simples y medibles. Menos caos, más
+  control, más tiempo para vivir.
+</p>
+
 
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <Link
@@ -55,12 +56,13 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-2 text-[11px] text-slate-100/80">
             {[
-              "ERP-lite sobre Google",
-              "Bots de WhatsApp",
-              "Integraciones & RPA",
-              "Dashboards ejecutivos",
-              "FUTURA Wallet",
-            ].map((chip) => (
+  "Digitalización de procesos",
+  "Automatización",
+  "Bots con Inteligencia Artificial",
+  "Dashboards ejecutivos",
+  "FUTURA Wallet",
+].map((chip) => (
+
               <span
                 key={chip}
                 className="px-3 py-1 rounded-full border border-white/25 bg-white/5"
