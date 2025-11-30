@@ -15,7 +15,7 @@ export default function Problem() {
       >
         <div>
           <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-3">
-            Si todo está en papel, Excel y WhatsApp,
+            Si todo está en papel, WhatsApp y archivos sueltos,
             <br />
             ya no estás creciendo: estás sobreviviendo.
           </h2>
@@ -25,8 +25,8 @@ export default function Problem() {
           </p>
           <div className="space-y-3 text-sm text-slate-700">
             <ProblemItem title="Información dispersa">
-              Excel, libretas, WhatsApp, correos, fotos en el celular… nadie
-              sabe dónde está la última versión de nada.
+              Formatos en papel, carpetas físicas, WhatsApp, correos, fotos en
+              el celular… nadie sabe dónde está la última versión de nada.
             </ProblemItem>
             <ProblemItem title="Dependencia de personas clave">
               La operación depende de “la persona que sabe”. Si falta, todo se
@@ -36,9 +36,9 @@ export default function Problem() {
               No hay dashboards ni indicadores claros. Se decide por intuición,
               no por datos.
             </ProblemItem>
-            <ProblemItem title="ERPs que no encajan">
-              Las soluciones grandes son caras, lentas de implementar y no se
-              adaptan a la realidad del día a día.
+            <ProblemItem title="Tecnología que no encaja">
+              ERPs gigantes, caros y rígidos que no se adaptan a tu realidad…
+              o seguir como siempre con papel y chats. Ninguna opción convence.
             </ProblemItem>
           </div>
         </div>
@@ -55,7 +55,8 @@ export default function Problem() {
           <p className="text-xs md:text-sm text-slate-600">
             FUTURA te ayuda a pasar de la escena de la izquierda (papeles,
             estrés, retrabajo) a la de la derecha: una operación clara, con
-            procesos definidos y dashboards que muestran lo que importa.
+            procesos digitalizados, automatizados y apoyados por IA donde más
+            conviene.
           </p>
         </div>
       </motion.div>
