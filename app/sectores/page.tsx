@@ -9,9 +9,11 @@ export default function SectoresPage() {
           Sectores en los que trabajamos
         </h1>
         <p className="text-slate-600 max-w-2xl">
-          FUTURA es transversal a distintas PYMES, pero hoy nos enfocamos en
-          agroalimentos y lácteos, retail, combustibles y flotas, servicios
-          técnicos/seguridad e industrias B2B.
+  FUTURA es transversal a distintas PYMES e industrias. A modo de
+  ejemplo, hemos diseñado soluciones para agroindustria y alimentos,
+  retail, combustibles y flotas, servicios técnicos/seguridad e
+  industrias B2B, pero podemos adaptarnos a otros sectores con
+  procesos repetitivos y mucho papel.
         </p>
       </section>
       <Sectors />
