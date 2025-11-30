@@ -21,19 +21,19 @@ export default function Hero() {
           className="flex-1"
         >
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#B3B1CA] mb-4">
-            FUTURA • AUTOMATIZACIÓN PARA PYMES
+            FUTURA • DIGITALIZACIÓN, AUTOMATIZACIÓN E IA PARA PYMES
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-4">
-            Automatización a la medida para PYMES
+            Digitalización y automatización con IA aplicada
             <br />
-            que ya crecieron y necesitan orden.
+            para PYMES que ya crecieron y necesitan orden.
           </h1>
           <p className="text-sm md:text-base text-slate-100/90 max-w-xl mb-6">
-  Digitalizamos y automatizamos tu negocio, no mas papel y excels complicados o tardados, optimizamos con
-  sistemas dispersos en flujos simples y medibles. Menos caos, más
-  control, más tiempo para vivir.
-</p>
-
+            Digitalizamos y automatizamos tus formularios en papel, WhatsApp y
+            sistemas dispersos usando inteligencia artificial y herramientas
+            nocode. Deja que las máquinas hagan el trabajo repetitivo y
+            enfócate en hacer crecer la empresa.
+          </p>
 
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <Link
@@ -56,13 +56,12 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-2 text-[11px] text-slate-100/80">
             {[
-  "Digitalización de procesos",
-  "Automatización",
-  "Bots con Inteligencia Artificial",
-  "Dashboards ejecutivos",
-  "FUTURA Wallet",
-].map((chip) => (
-
+              "Digitalización de procesos",
+              "Automatización con n8n",
+              "IA aplicada al negocio",
+              "Bots de WhatsApp",
+              "FUTURA Wallet",
+            ].map((chip) => (
               <span
                 key={chip}
                 className="px-3 py-1 rounded-full border border-white/25 bg-white/5"
