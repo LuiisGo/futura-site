@@ -150,8 +150,8 @@ function MenuView({ onSelect }: { onSelect: (m: Mode) => void }) {
     <div className="space-y-3">
       <p className="text-slate-700">
         👋 Hola, soy <span className="font-semibold">FUTURA Bot</span>. Puedo
-        ayudarte a entender qué podemos automatizar y a agendar un diagnóstico
-        con el equipo.
+        ayudarte a ver cómo digitalizar tus formularios en papel, automatizar
+        procesos repetitivos con IA y agendar un diagnóstico con el equipo.
       </p>
       <p className="font-semibold text-slate-800">
         ¿Qué te gustaría hacer ahora?
@@ -167,7 +167,7 @@ function MenuView({ onSelect }: { onSelect: (m: Mode) => void }) {
           onClick={() => onSelect("examples")}
           className="w-full text-left px-3 py-2 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium hover:bg-slate-200 transition-colors"
         >
-          Ver ejemplos de automatización
+          Ver ejemplos de digitalización y automatización
         </button>
         <button
           onClick={() => onSelect("faq")}
@@ -195,16 +195,16 @@ function FAQView({ onBack }: { onBack: () => void }) {
     <div className="space-y-3">
       <p className="font-semibold text-slate-800 text-xs">FAQ rápidas</p>
       <FAQLine
-        q="¿Qué es un ERP-lite?"
-        a="Es un sistema de operación hecho a la medida sobre herramientas accesibles (Google, WhatsApp, n8n), en lugar de un ERP gigante y cerrado."
+        q="¿Qué significa que usan inteligencia artificial?"
+        a="La IA nos ayuda a entender mensajes en lenguaje natural, resumir información, responder sobre tus procesos y clasificar tareas automáticamente."
       />
       <FAQLine
-        q="¿Qué automatizan normalmente?"
-        a="Captura de datos, generación de reportes, alertas, tickets, órdenes, rutas, lealtad y más."
+        q="¿Necesito tener todo digitalizado antes?"
+        a="No. Parte del proyecto es justamente pasar de papel y archivos sueltos a flujos digitales para que luego la automatización y la IA puedan trabajar."
       />
       <FAQLine
         q="¿Pueden trabajar remoto?"
-        a="Sí, trabajamos 100% remoto para PYMES en Guatemala y LATAM."
+        a="Sí, podemos implementar todo a distancia para PYMES en Guatemala y otros países."
       />
       <button
         onClick={onBack}
@@ -229,23 +229,23 @@ function ExamplesView({ onBack }: { onBack: () => void }) {
   return (
     <div className="space-y-3">
       <p className="font-semibold text-slate-800 text-xs">
-        Ejemplos de automatización
+        Ejemplos de digitalización + IA
       </p>
       <FAQLine
-        q="Lácteos / Agroalimentos"
-        a="Producción diaria registrada desde planta, inventarios por lote, rutas de reparto y cobranza reflejados en dashboards ejecutivos."
+        q="Agroindustria y alimentos"
+        a="Producción diaria registrada desde planta sin planillas en papel, inventarios por lote, rutas de reparto y cobranza reflejados en dashboards ejecutivos, con alertas inteligentes basadas en IA."
       />
       <FAQLine
         q="Retail"
-        a="Reposiciones automáticas por nivel de stock, reportes de rotación y márgenes por producto, programas de lealtad con FUTURA Wallet."
+        a="Reposiciones automáticas por nivel de stock, reportes de rotación y márgenes por producto, programas de lealtad con FUTURA Wallet y segmentación de clientes usando IA."
       />
       <FAQLine
         q="Combustibles / Flotas"
-        a="Flujo completo de cotización, órdenes y seguimiento de entregas, con panel de clientes y estado de facturación."
+        a="Flujo completo de cotización, órdenes y seguimiento de entregas, con panel de clientes, estado de facturación y alertas inteligentes para consumos fuera de rango."
       />
       <FAQLine
         q="Servicios técnicos / Seguridad"
-        a="Tickets centralizados, activos con QR, agenda de mantenimiento preventivo y bot interno para soporte rápido."
+        a="Tickets centralizados, activos con QR, agenda de mantenimiento preventivo y bot interno con IA que responde preguntas rápidas del equipo."
       />
       <button
         onClick={onBack}
@@ -335,7 +335,7 @@ function BookingView({
           onChange={(e) => setLead({ ...lead, sector: e.target.value })}
         >
           <option value="">Selecciona una opción</option>
-          <option value="lacteos">Agroalimentos / Lácteos</option>
+          <option value="agroindustria">Agroindustria y alimentos</option>
           <option value="retail">Retail</option>
           <option value="combustibles">Combustibles / Flotas</option>
           <option value="servicios">Servicios técnicos / Seguridad</option>
@@ -396,7 +396,7 @@ function BookingView({
         </div>
       )}
 
-      <div className="flex items-center justify-between pt-1">
+      <div className="flex items-center justify_between pt-1">
         <button
           onClick={onBack}
           className="text-[11px] text-slate-500 underline underline-offset-2"
