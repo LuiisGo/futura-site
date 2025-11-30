@@ -1,24 +1,28 @@
-import Sectors from "@/components/sections/Sectors";
-import CTASection from "@/components/sections/CTASection";
+import type { Metadata } from "next";
+import "./globals.css";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import ChatWidget from "../components/chat/ChatWidget";
 
-export default function SectoresPage() {
+export const metadata: Metadata = {
+  title: "FUTURA | WORK LESS, LIVE MORE",
+  description:
+    "FUTURA: consultora de digitalización, automatización e inteligencia artificial aplicada para PYMES. Convertimos papel, WhatsApp y sistemas dispersos en flujos digitales inteligentes, medibles y listos para crecer.",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <>
-      <section className="max-w-6xl mx-auto px-4 pt-6 pb-4">
-        <h1 className="text-3xl md:text-4xl font-semibold text-[#362263] mb-3">
-          Sectores que potenciamos con FUTURA
-        </h1>
-        <p className="text-sm md:text-base text-slate-600 max-w-2xl">
-          FUTURA es transversal a distintas PYMES e industrias. A modo de
-          ejemplo, hemos diseñado soluciones para agroindustria y alimentos,
-          retail, combustibles y flotas, servicios técnicos/seguridad e
-          industrias B2B, pero podemos adaptarnos a otros sectores con procesos
-          repetitivos, mucha documentación en papel y oportunidades claras de
-          automatización e IA.
-        </p>
-      </section>
-      <Sectors />
-      <CTASection />
-    </>
+    <html lang="es">
+      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
+        <Navbar />
+        <main className="pt-16 md:pt-20">{children}</main>
+        <Footer />
+        <ChatWidget />
+      </body>
+    </html>
   );
 }
