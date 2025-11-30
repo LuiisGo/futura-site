@@ -1,5 +1,5 @@
-import Services from "@/components/sections/Services";
-import CTASection from "@/components/sections/CTASection";
+import Services from "../../components/sections/Services";
+import CTASection from "../../components/sections/CTASection";
 
 export default function ServiciosPage() {
   return (
