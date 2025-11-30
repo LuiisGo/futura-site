@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const sectors = [
-  {
-    title: "Agroalimentos y lácteos",
-    description:
-      "Producción diaria, lotes, caducidades, rutas de reparto, devoluciones, cobranzas y análisis de márgenes por cliente y producto.",
-  },
+ {
+  title: "Agroindustria y alimentos",
+  description:
+    "Procesos productivos diarios, lotes, trazabilidad, rutas de reparto, devoluciones, cobranzas y análisis de márgenes por cliente y producto.",
+},
   {
     title: "Retail",
     description:
