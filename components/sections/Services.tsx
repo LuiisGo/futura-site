@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 const services = [
-  {
-    title: "ERP-lite sobre Google",
-    description:
-      "Sistemas a medida sobre Google Sheets, Forms y Apps Script. Módulos de ventas, inventarios, producción, compras, logística, mantenimiento y calidad.",
-    tags: ["Google Sheets", "Apps Script", "Módulos a la medida"],
-  },
+ {
+  title: "Digitalización de procesos y datos",
+  description:
+    "Tomamos formularios en papel, checklists, guías de trabajo y reportes manuales y los convertimos en flujos digitales listos para automatizar. Cuando hace sentido, lo organizamos en una capa tipo ERP-lite.",
+  tags: ["Digitalización", "Mapeo de procesos", "ERP-lite cuando hace falta"],
+},
   {
     title: "Chatbots de WhatsApp inteligentes",
     description:
