@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const sectors = [
- {
-  title: "Agroindustria y alimentos",
-  description:
-    "Procesos productivos diarios, lotes, trazabilidad, rutas de reparto, devoluciones, cobranzas y análisis de márgenes por cliente y producto.",
-},
+  {
+    title: "Agroindustria y alimentos",
+    description:
+      "Procesos productivos diarios, lotes, trazabilidad, rutas de reparto, devoluciones, cobranzas y análisis de márgenes por cliente y producto.",
+  },
   {
     title: "Retail",
     description:
@@ -29,11 +29,11 @@ const sectors = [
     description:
       "Cotizaciones complejas, órdenes de compra, órdenes de producción, despachos y trazabilidad de proyectos o clientes.",
   },
-{
-  title: "Otros sectores",
-  description:
-    "Cualquier empresa con operación recurrente, mucha documentación en papel o procesos manuales (servicios, logística, salud, educación, construcción, etc.) puede beneficiarse de la digitalización y automatización de FUTURA.",
-},
+  {
+    title: "Otros sectores",
+    description:
+      "Cualquier empresa con operación recurrente, mucha documentación en papel o procesos manuales (servicios, logística, salud, educación, construcción, etc.) puede beneficiarse de la digitalización y automatización de FUTURA.",
+  },
 ];
 
 export default function Sectors() {
@@ -51,9 +51,10 @@ export default function Sectors() {
               Sectores donde FUTURA encaja perfecto
             </h2>
             <p className="text-sm md:text-base text-slate-600 max-w-xl">
-              Hemos diseñado FUTURA pensando en operaciones reales:
-              producción, bodegas, rutas, servicio en campo y oficinas que
-              necesitan ordenarse sin perder velocidad.
+              Estos son ejemplos de sectores donde FUTURA encaja muy bien, pero
+              no son los únicos. Si tu empresa tiene procesos repetitivos, mucha
+              información en papel o flujos manuales, probablemente podemos
+              ayudarte sin importar la industria.
             </p>
           </div>
           <div className="flex-1 max-w-xs md:max-w-sm mx-auto md:mx-0">
