@@ -29,11 +29,11 @@ const sectors = [
     description:
       "Cotizaciones complejas, órdenes de compra, órdenes de producción, despachos y trazabilidad de proyectos o clientes.",
   },
-  {
-    title: "Otros sectores",
-    description:
-      "Si tu empresa tiene operación recurrente, inventarios, rutas, tickets o proyectos, probablemente podamos ayudarte.",
-  },
+{
+  title: "Otros sectores",
+  description:
+    "Cualquier empresa con operación recurrente, mucha documentación en papel o procesos manuales (servicios, logística, salud, educación, construcción, etc.) puede beneficiarse de la digitalización y automatización de FUTURA.",
+},
 ];
 
 export default function Sectors() {
