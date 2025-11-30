@@ -9,9 +9,7 @@ export default function SobreFuturaPage() {
           FUTURA es una consultora de automatización y optimización operativa
           para PYMES que ya crecieron y necesitan orden. Tomamos tus procesos
           actuales (Excel, WhatsApp, cuadernos, sistemas sueltos) y los
-          convertimos en flujos digitales, conectados y automatizados usando
-          herramientas accesibles como Google, WhatsApp y plataformas
-          nocode/low-code.
+          convertimos en flujos digitales, conectados y automatizados 
         </p>
         <p className="text-slate-600">
           Nuestro propósito es que puedas{" "}
@@ -27,9 +25,8 @@ export default function SobreFuturaPage() {
         <p className="text-slate-600 mb-3">
           Muchas PYMES quedan atrapadas entre dos extremos: seguir sufriendo con
           Excel y WhatsApp o invertir en un ERP gigante, caro y poco flexible.
-          FUTURA nace para ofrecer un punto medio inteligente: un ERP-lite
-          modular, construido sobre herramientas que tú y tu equipo ya entienden
-          y pueden seguir utilizando.
+          FUTURA nace para ofrecer un punto medio inteligente:  primero digitalizamos y automatizamos tus procesos, y cuando hace
+  sentido, los organizamos en una capa tipo ERP-lite modular.
         </p>
         <p className="text-slate-600">
           No vendemos una licencia de software; diseñamos un sistema a la medida
