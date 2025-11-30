@@ -14,11 +14,12 @@ export default function Solution() {
         className="grid md:grid-cols-2 gap-10 items-start"
       >
         <div>
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-3">
-            Un ERP-lite construido a tu medida,
-            <br />
-            sobre herramientas que ya conoces.
-          </h2>
+         <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-3">
+  Digitalización y automatización a tu medida,
+  <br />
+  sobre herramientas que ya conoces.
+</h2>
+
           <p className="text-sm md:text-base text-slate-600 mb-4">
             No te obligamos a abandonar tus herramientas actuales. Diseñamos un
             sistema que conecta lo que ya usas con automatizaciones y
