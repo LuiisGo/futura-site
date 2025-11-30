@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Wallet() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <section className="max-w-6xl mx_auto px-4 py-10 md:py-14">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -21,15 +21,25 @@ export default function Wallet() {
             Lealtad y club de clientes, conectado a tu operación.
           </h2>
           <p className="text-sm md:text-base text-slate-100/90 mb-4">
-            FUTURA Wallet es una solución de lealtad basada en QR/NFC +
-            WhatsApp. Asigna puntos, cupones y gift cards, mientras construyes
-            un mini-CRM de recurrencia sin salir de tu ecosistema.
+            FUTURA Wallet es una solución de lealtad basada en QR/NFC + WhatsApp
+            que combina automatización e inteligencia artificial para segmentar
+            mejor a tus clientes. Asigna puntos, cupones y gift cards mientras
+            construyes un mini-CRM de recurrencia sin salir de tu ecosistema.
           </p>
           <ul className="space-y-2 text-xs md:text-sm text-slate-100/90">
-            <li>• Identificación rápida de clientes con QR o tarjeta NFC.</li>
-            <li>• Puntos y recompensas configurables por segmento.</li>
-            <li>• Campañas dirigidas por WhatsApp según comportamiento real.</li>
-            <li>• Integración con tu ERP-lite y dashboards.</li>
+            <li>
+              • Identificación rápida de clientes con QR o tarjeta NFC.
+            </li>
+            <li>
+              • Puntos y recompensas configurables por segmento.
+            </li>
+            <li>
+              • Campañas dirigidas por WhatsApp potenciadas con IA para elegir
+              el mejor mensaje y momento para cada segmento.
+            </li>
+            <li>
+              • Integración con tu sistema operativo digital y dashboards.
+            </li>
           </ul>
         </div>
         <div className="space-y-3">
@@ -44,7 +54,8 @@ export default function Wallet() {
           </div>
           <p className="text-[11px] text-slate-100/85">
             FUTURA Wallet se conecta con tus ventas, inventarios y campañas para
-            premiar a los clientes correctos, en el momento correcto.
+            premiar a los clientes correctos, en el momento correcto, con ayuda
+            de automatización e IA.
           </p>
         </div>
       </motion.div>
