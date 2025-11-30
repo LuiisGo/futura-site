@@ -19,8 +19,9 @@ export default function CTASection() {
           </h2>
           <p className="text-sm md:text-base text-slate-100/90 max-w-xl">
             En 30–45 minutos revisamos tus procesos, identificamos quick wins y
-            te presentamos un plan concreto basado en ERP-lite, bots de WhatsApp
-            y automatización con n8n.
+            te presentamos un plan concreto basado en digitalización de
+            procesos, automatización con n8n e inteligencia artificial aplicada,
+            bots de WhatsApp y, cuando hace falta, una capa tipo ERP-lite.
           </p>
           <p className="text-[11px] text-slate-100/80 mt-2">
             Horarios: lunes a viernes de 10:00 a 19:00 (hora Guatemala).
