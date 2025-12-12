@@ -2,164 +2,201 @@
 
 import { useState } from "react";
 
-const N8N_WEBHOOK_URL =
-  process.env.NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL || "";
+const WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL;
 
 export default function ContactForm() {
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    country: "",
+    sector: "",
+    message: "",
+  });
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
+    "idle"
+  );
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
 
-    const payload = {
-      source: "contact_form",
-      name: formData.get("name"),
-      company: formData.get("company"),
-      role: formData.get("role"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      sector: formData.get("sector"),
-      pain: formData.get("pain"),
-    };
-
-    if (!N8N_WEBHOOK_URL) {
-      console.warn("Falta NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL");
+    if (!WEBHOOK_URL) {
+      console.error("Falta NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL en Netlify");
       setStatus("error");
       return;
     }
 
+    setStatus("sending");
+
     try {
-      setLoading(true);
-      setStatus("idle");
-      await fetch(N8N_WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          source: "contact_page",
+          ...form,
+        }),
       });
+
+      if (!res.ok) throw new Error("Respuesta no OK");
+
       setStatus("ok");
-      form.reset();
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        country: "",
+        sector: "",
+        message: "",
+      });
     } catch (err) {
       console.error(err);
       setStatus("error");
-    } finally {
-      setLoading(false);
     }
-  }
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 shadow-sm space-y-4 text-sm"
+      className="space-y-4 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
     >
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">
-            Nombre completo
+          <label className="block text-xs font-medium text-slate-600 mb-1">
+            Nombre completo*
           </label>
           <input
             name="name"
             required
+            value={form.name}
+            onChange={handleChange}
             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            placeholder="Juan Pérez"
           />
         </div>
+
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">
+          <label className="block text-xs font-medium text-slate-600 mb-1">
+            Correo electrónico*
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            value={form.email}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            placeholder="tucorreo@empresa.com"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium text-slate-600 mb-1">
+            Teléfono / WhatsApp
+          </label>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            placeholder="+502 0000 0000"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium text-slate-600 mb-1">
             Empresa
           </label>
           <input
             name="company"
+            value={form.company}
+            onChange={handleChange}
             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            placeholder="Nombre de tu empresa"
           />
         </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">
-            Rol / Puesto
+          <label className="block text-xs font-medium text-slate-600 mb-1">
+            País / ciudad
           </label>
           <input
-            name="role"
+            name="country"
+            value={form.country}
+            onChange={handleChange}
             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            placeholder="Guatemala, México, etc."
           />
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              defaultValue="luiiss.marro@gmail.com"
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1">
-              WhatsApp
-            </label>
-            <input
-              name="phone"
-              defaultValue="+50233813895"
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            />
-          </div>
-        </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">
+          <label className="block text-xs font-medium text-slate-600 mb-1">
             Sector
           </label>
           <select
             name="sector"
+            value={form.sector}
+            onChange={handleChange}
             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
           >
             <option value="">Selecciona una opción</option>
-            <option value="lacteos">Agroalimentos / Lácteos</option>
-            <option value="retail">Retail</option>
-            <option value="combustibles">Combustibles / Flotas</option>
-            <option value="servicios">Servicios técnicos / Seguridad</option>
+            <option value="agroindustria">Agroindustria / alimentos</option>
+            <option value="retail">Retail / tiendas</option>
+            <option value="combustibles">Combustibles / flotas</option>
+            <option value="servicios">Servicios técnicos / seguridad</option>
             <option value="industrial">Industrial B2B</option>
             <option value="otro">Otro</option>
           </select>
         </div>
-        <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">
-            Principal dolor hoy
-          </label>
-          <input
-            name="pain"
-            placeholder="Ej: inventarios, ventas, mantenimiento, reportes..."
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-          />
-        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium text-slate-600 mb-1">
+          Cuéntanos brevemente qué quisieras ordenar / automatizar
+        </label>
+        <textarea
+          name="message"
+          value={form.message}
+          onChange={handleChange}
+          rows={4}
+          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+          placeholder="Ej: control de pedidos, inventarios, formularios en papel, reportes de producción, etc."
+        />
       </div>
 
       <button
         type="submit"
-        disabled={loading}
-        className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#362263] text-white text-sm font-semibold hover:bg-[#2c1a50] transition-colors disabled:opacity-60"
+        disabled={status === "sending"}
+        className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#362263] text-white text-sm font-medium hover:bg-[#2c1a50] disabled:opacity-60"
       >
-        {loading ? "Enviando..." : "Enviar y agendar diagnóstico"}
+        {status === "sending"
+          ? "Enviando..."
+          : "Agendar diagnóstico gratuito"}
       </button>
 
       {status === "ok" && (
-        <p className="text-xs text-emerald-600">
-          ¡Gracias! Recibimos tu información. Te contactaremos para coordinar la
-          llamada.
+        <p className="text-xs text-emerald-600 mt-1">
+          ✅ Gracias, recibimos tu información. Te contactaremos pronto para
+          coordinar el diagnóstico.
         </p>
       )}
+
       {status === "error" && (
-        <p className="text-xs text-rose-600">
-          Ocurrió un error al enviar. Revisa tu conexión o escribe directamente
-          a <strong>luiiss.marro@gmail.com</strong>.
+        <p className="text-xs text-red-500 mt-1">
+          Hubo un problema al enviar. Intenta de nuevo o escríbenos por
+          WhatsApp.
         </p>
       )}
     </form>
