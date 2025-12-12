@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL;
+const WEBHOOK_URL = "/api/contact";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
