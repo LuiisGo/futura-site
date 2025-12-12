@@ -1,68 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
-const WEBHOOK_URL = "/api/contact";
+type Status = "idle" | "sending" | "ok" | "error";
 
 export default function ContactForm() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    country: "",
-    sector: "",
-    message: "",
-  });
+  const [status, setStatus] = useState<Status>("idle");
 
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
-    "idle"
-  );
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!WEBHOOK_URL) {
-      console.error("Falta NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL en Netlify");
-      setStatus("error");
-      return;
-    }
-
     setStatus("sending");
 
+    const formData = new FormData(e.currentTarget);
+
+    const payload = {
+      source: "contact_page",
+      name: String(formData.get("name") || ""),
+      email: String(formData.get("email") || ""),
+      phone: String(formData.get("phone") || ""),
+      company: String(formData.get("company") || ""),
+      country: String(formData.get("country") || ""),
+      sector: String(formData.get("sector") || ""),
+      message: String(formData.get("message") || ""),
+    };
+
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          source: "contact_page",
-          ...form,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error("Respuesta no OK");
+      if (!res.ok) {
+        console.error("API /api/contact respondió NOT OK", await res.text());
+        throw new Error("API not ok");
+      }
 
       setStatus("ok");
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        country: "",
-        sector: "",
-        message: "",
-      });
+      e.currentTarget.reset();
     } catch (err) {
-      console.error(err);
+      console.error("Error enviando formulario:", err);
       setStatus("error");
     }
   };
@@ -70,135 +49,121 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
+      className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
     >
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             Nombre completo*
           </label>
           <input
             name="name"
+            type="text"
             required
-            value={form.name}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            placeholder="Juan Pérez"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             Correo electrónico*
           </label>
           <input
-            type="email"
             name="email"
+            type="email"
             required
-            value={form.email}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            placeholder="tucorreo@empresa.com"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             Teléfono / WhatsApp
           </label>
           <input
             name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            placeholder="+502 0000 0000"
+            type="tel"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             Empresa
           </label>
           <input
             name="company"
-            value={form.company}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            placeholder="Nombre de tu empresa"
+            type="text"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             País / ciudad
           </label>
           <input
             name="country"
-            value={form.country}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-            placeholder="Guatemala, México, etc."
+            type="text"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">
+          <label className="block text-sm font-medium text-slate-700">
             Sector
           </label>
           <select
             name="sector"
-            value={form.sector}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
           >
             <option value="">Selecciona una opción</option>
             <option value="agroindustria">Agroindustria / alimentos</option>
             <option value="retail">Retail / tiendas</option>
-            <option value="combustibles">Combustibles / flotas</option>
-            <option value="servicios">Servicios técnicos / seguridad</option>
-            <option value="industrial">Industrial B2B</option>
+            <option value="servicios">Servicios</option>
+            <option value="manufactura">Manufactura</option>
+            <option value="logistica">Logística / transporte</option>
             <option value="otro">Otro</option>
           </select>
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-slate-600 mb-1">
+        <label className="block text-sm font-medium text-slate-700">
           Cuéntanos brevemente qué quisieras ordenar / automatizar
         </label>
         <textarea
           name="message"
-          value={form.message}
-          onChange={handleChange}
           rows={4}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C88BA]/40 focus:border-[#3C88BA]"
-          placeholder="Ej: control de pedidos, inventarios, formularios en papel, reportes de producción, etc."
+          className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#362263] text-white text-sm font-medium hover:bg-[#2c1a50] disabled:opacity-60"
-      >
-        {status === "sending"
-          ? "Enviando..."
-          : "Agendar diagnóstico gratuito"}
-      </button>
+      <div className="pt-2 flex flex-col gap-2">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex items-center justify-center rounded-full bg-[#6C4DE6] px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-[#5b3fd1] disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {status === "sending"
+            ? "Enviando..."
+            : "Agendar diagnóstico gratuito"}
+        </button>
 
-      {status === "ok" && (
-        <p className="text-xs text-emerald-600 mt-1">
-          ✅ Gracias, recibimos tu información. Te contactaremos pronto para
-          coordinar el diagnóstico.
-        </p>
-      )}
+        {status === "ok" && (
+          <p className="text-sm text-emerald-600">
+            ¡Listo! Recibimos tu información. Te contactaremos pronto para
+            agendar la llamada.
+          </p>
+        )}
 
-      {status === "error" && (
-        <p className="text-xs text-red-500 mt-1">
-          Hubo un problema al enviar. Intenta de nuevo o escríbenos por
-          WhatsApp.
-        </p>
-      )}
+        {status === "error" && (
+          <p className="text-sm text-rose-600">
+            Hubo un problema al enviar. Intenta de nuevo o escríbenos por
+            WhatsApp.
+          </p>
+        )}
+      </div>
     </form>
   );
 }
