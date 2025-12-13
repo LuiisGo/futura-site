@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { FiMessageCircle, FiX, FiSend } from "react-icons/fi";
 
 type Mode = "menu" | "chat" | "book" | "faq" | "examples";
@@ -21,6 +22,9 @@ interface ChatMessage {
   role: "user" | "assistant";
   content: string;
 }
+
+const CONTACT_API_PATH = "/api/contact";
+const CHAT_API_PATH = "/api/futura-bot";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -87,7 +91,7 @@ export default function ChatWidget() {
         }. Tamaño aproximado de la empresa: ${lead.size || "no especificado"}.`,
       };
 
-      const res = await fetch("/api/contact", {
+      const res = await fetch(CONTACT_API_PATH, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -109,7 +113,7 @@ export default function ChatWidget() {
         size: "",
       });
 
-      // Mensaje de confirmación en el chat (opcional)
+      // Mensaje de confirmación en el chat
       setMessages((prev) => [
         ...prev,
         {
@@ -121,9 +125,11 @@ export default function ChatWidget() {
       ]);
     } catch (err) {
       console.error("[ChatWidget] Error enviando lead:", err);
-      window.alert(
-        "Hubo un problema al enviar tus datos. Intenta de nuevo o escríbenos por WhatsApp."
-      );
+      if (typeof window !== "undefined") {
+        window.alert(
+          "Hubo un problema al enviar tus datos. Intenta de nuevo o escríbenos por WhatsApp."
+        );
+      }
     } finally {
       setLeadLoading(false);
     }
@@ -139,6 +145,7 @@ export default function ChatWidget() {
       content: text,
     };
 
+    // Añadimos el mensaje del usuario al chat
     setMessages((prev) => [...prev, userMsg]);
     setChatInput("");
     setChatLoading(true);
@@ -151,7 +158,7 @@ export default function ChatWidget() {
         })),
       };
 
-      const res = await fetch("/api/futura-bot", {
+      const res = await fetch(CHAT_API_PATH, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -196,28 +203,43 @@ export default function ChatWidget() {
         <div className="mb-3 w-80 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
           {/* Header */}
           <div className="px-4 py-3 bg-[#362263] text-white flex items-center justify-between">
-            <div>
-              <div className="text-xs uppercase tracking-[0.2em] text-[#B3B1CA]">
-                FUTURA BOT
+            <div className="flex items-center gap-2">
+              <div className="relative h-6 w-6 rounded-full bg-white/5 flex items-center justify-center">
+                <Image
+                  src="/logo-futura-deeppurple.png"
+                  alt="FUTURA"
+                  fill
+                  className="object-contain"
+                />
               </div>
-              <div className="text-sm font-semibold">
-                {mode === "chat"
-                  ? "Asistente virtual"
-                  : mode === "book"
-                  ? "Agendar diagnóstico"
-                  : "¿En qué te ayudamos?"}
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.18em] text-[#B3B1CA]">
+                  FUTURA BOT
+                </div>
+                <div className="text-sm font-semibold leading-tight">
+                  {mode === "chat"
+                    ? "Asistente virtual"
+                    : mode === "book"
+                    ? "Agendar diagnóstico"
+                    : "¿En qué te ayudamos?"}
+                </div>
+                <div className="text-[10px] text-[#C9C7DE]">
+                  Work less, live more.
+                </div>
               </div>
             </div>
             <button
-              onClick={() => setOpen(false)}
-              className="p-1 rounded-full hover:bg-white/10"
+              onClick={() => {
+                setOpen(false);
+              }}
+              className="p-1 rounded-full hover:bg-white/10 transition-colors"
             >
               <FiX size={16} />
             </button>
           </div>
 
           {/* Body */}
-          <div className="px-4 py-3 max-h-[360px] overflow-y-auto text-xs text-slate-700 space-y-3">
+          <div className="px-4 py-3 max-h-[380px] overflow-y-auto text-xs text-slate-700 space-y-3">
             {mode === "menu" && (
               <MenuView
                 onSelect={(m) => {
@@ -270,7 +292,16 @@ export default function ChatWidget() {
       {/* Botón flotante */}
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          setOpen((prev) => {
+            const next = !prev;
+            if (next) {
+              // cada vez que se abre, lo mandamos al menú
+              setMode("menu");
+            }
+            return next;
+          });
+        }}
         className="relative flex items-center justify-center w-12 h-12 rounded-full bg-[#362263] text-white shadow-xl hover:bg-[#2c1a50] transition-colors"
       >
         <FiMessageCircle size={22} />
