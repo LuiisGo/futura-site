@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { FiMessageCircle, FiX, FiSend } from "react-icons/fi";
 
-const N8N_WEBHOOK_URL =
-  process.env.NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL || "";
-
 type Mode = "menu" | "book" | "faq" | "examples";
 
 interface LeadState {
@@ -51,26 +48,53 @@ export default function ChatWidget() {
     setDone(false);
   };
 
+  // Enviar lead del chatbot a /api/contact (que luego manda a n8n)
   async function handleSubmitLead() {
-    if (!N8N_WEBHOOK_URL) {
-      console.warn("Falta NEXT_PUBLIC_N8N_LEAD_WEBHOOK_URL");
-      setDone(true);
-      return;
-    }
+    if (loading) return;
+
     try {
       setLoading(true);
-      await fetch(N8N_WEBHOOK_URL, {
+
+      const payload = {
+        source: "futura_bot", // Así lo verás en Sheets y en el correo
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone,
+        company: lead.company,
+        country: lead.country,
+        sector: lead.sector || "Otro",
+        message: `Dolor principal: ${
+          lead.pain || "no especificado"
+        }. Tamaño aproximado de la empresa: ${lead.size || "no especificado"}.`,
+      };
+
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          source: "chatbot",
-          ...lead,
-        }),
+        body: JSON.stringify(payload),
       });
+
+      if (!res.ok) {
+        throw new Error("Respuesta no OK desde /api/contact");
+      }
+
+      // Si todo salió bien:
       setDone(true);
+      setLead({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        country: "",
+        sector: "",
+        pain: "",
+        size: "",
+      });
     } catch (err) {
-      console.error(err);
-      setDone(true);
+      console.error("[ChatWidget] Error enviando lead:", err);
+      window.alert(
+        "Hubo un problema al enviar tus datos. Intenta de nuevo o escríbenos por WhatsApp."
+      );
     } finally {
       setLoading(false);
     }
@@ -83,6 +107,7 @@ export default function ChatWidget() {
     <div className="fixed bottom-5 right-4 md:bottom-6 md:right-6 z-50">
       {open && (
         <div className="mb-3 w-80 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+          {/* Header */}
           <div className="px-4 py-3 bg-[#362263] text-white flex items-center justify-between">
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-[#B3B1CA]">
@@ -98,6 +123,7 @@ export default function ChatWidget() {
             </button>
           </div>
 
+          {/* Body */}
           <div className="px-4 py-3 max-h-[360px] overflow-y-auto text-xs text-slate-700 space-y-3">
             {mode === "menu" && (
               <MenuView
@@ -133,6 +159,7 @@ export default function ChatWidget() {
         </div>
       )}
 
+      {/* Botón flotante */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -179,10 +206,10 @@ function MenuView({ onSelect }: { onSelect: (m: Mode) => void }) {
       <p className="text-[10px] text-slate-500">
         Tip: si prefieres, puedes escribirnos directo a{" "}
         <a
-          href="mailto:luiiss.marro@gmail.com"
+          href="mailto:hola@futuratt.com"
           className="underline underline-offset-2"
         >
-          luiiss.marro@gmail.com
+          hola@futuratt.com
         </a>
         .
       </p>
@@ -274,7 +301,7 @@ function BookingView({
   done: boolean;
   loading: boolean;
   onBack: () => void;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void>;
 }) {
   const steps = [
     "¿En qué país está tu empresa?",
@@ -299,7 +326,7 @@ function BookingView({
         </p>
         <p className="text-[11px] text-slate-600">
           Te contactaremos desde{" "}
-          <span className="font-semibold">luiiss.marro@gmail.com</span> o vía
+          <span className="font-semibold">hola@futuratt.com</span> o vía
           WhatsApp para coordinar la llamada de diagnóstico.
         </p>
         <button
@@ -396,7 +423,7 @@ function BookingView({
         </div>
       )}
 
-      <div className="flex items-center justify_between pt-1">
+      <div className="flex items-center justify-between pt-1">
         <button
           onClick={onBack}
           className="text-[11px] text-slate-500 underline underline-offset-2"
