@@ -2,8 +2,9 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-// Fuerza runtime en Node para que la librería de OpenAI funcione bien
-export const runtime = "nodejs";
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 const SYSTEM_PROMPT = `
 Eres FUTURA Bot, el asistente virtual oficial de FUTURA, un estudio de digitalización y automatización para PYMES.
@@ -220,34 +221,26 @@ export async function POST(req: Request) {
     const body = (await req.json()) as { messages?: IncomingChatMessage[] };
 
     if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
-      return NextResponse.json({ error: "Missing messages array" }, { status: 400 });
+      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      // Esto te va a salir en la pestaña "Response" si falta la env var
-      return NextResponse.json(
-        { error: "Missing OPENAI_API_KEY env var" },
-        { status: 500 }
-      );
+      console.error("Falta OPENAI_API_KEY");
+      return NextResponse.json({ error: "Config error" }, { status: 500 });
     }
-
-    const client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
 
     const chatMessages = [
       { role: "system" as const, content: SYSTEM_PROMPT },
       ...body.messages.map((m) => ({
-        role: m.role as "user" | "assistant",
+        role: m.role,
         content: m.content,
       })),
     ];
 
     const completion = await client.chat.completions.create({
-      model: "gpt-5.1-mini",
+      model: "gpt-4o",            // ⬅️ AQUÍ EL CAMBIO IMPORTANTE
       messages: chatMessages,
       temperature: 0.5,
-      max_tokens: 450,
     });
 
     const reply =
@@ -260,7 +253,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error: "Server error",
-        details: err?.message || "Unexpected error",
+        details: err?.message || String(err),
       },
       { status: 500 }
     );
