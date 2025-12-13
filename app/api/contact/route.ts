@@ -1,5 +1,16 @@
 import { NextResponse } from "next/server";
 
+type IncomingLead = {
+  source?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  company?: string;
+  country?: string;
+  sector?: string;
+  message?: string;
+};
+
 export async function POST(req: Request) {
   try {
     const webhookUrl = process.env.N8N_LEAD_WEBHOOK_URL;
@@ -12,12 +23,25 @@ export async function POST(req: Request) {
       );
     }
 
-    const body = await req.json();
+    const body = (await req.json()) as IncomingLead;
+
+    // Normalizamos lo que le mandamos a n8n
+    const payload = {
+      source: body.source ?? "contact_page",
+      name: body.name ?? "",
+      email: body.email ?? "",
+      phone: body.phone ?? "",
+      company: body.company ?? "",
+      country: body.country ?? "",
+      sector: body.sector ?? "",
+      message: body.message ?? "",
+    };
 
     const res = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify(payload),
+      cache: "no-store",
     });
 
     if (!res.ok) {
