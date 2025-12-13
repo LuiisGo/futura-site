@@ -6,9 +6,6 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Si quieres cambiar de modelo, cambia SOLO esta constante
-const CHAT_MODEL = "gpt-5.2-chat-latest"; // o "gpt-4.1-mini" si quieres algo más barato
-
 const SYSTEM_PROMPT = `
 Eres FUTURA Bot, el asistente virtual oficial de FUTURA, un estudio de digitalización y automatización para PYMES.
 
@@ -221,44 +218,43 @@ type IncomingChatMessage = {
 
 export async function POST(req: Request) {
   try {
+    // 1) Validar API key
     if (!process.env.OPENAI_API_KEY) {
       console.error("Falta OPENAI_API_KEY");
       return NextResponse.json(
-        { error: "Config error: falta OPENAI_API_KEY" },
+        { error: "Config error: missing OPENAI_API_KEY" },
         { status: 500 }
       );
     }
 
+    // 2) Leer body
     const body = (await req.json()) as { messages?: IncomingChatMessage[] };
 
     if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
-      return NextResponse.json(
-        { error: "Missing messages array" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
     }
 
-    // Limitar historial por si acaso (por ejemplo a las últimas 15)
-    const trimmedMessages = body.messages.slice(-15);
-
+    // 3) Armar historial para el modelo
     const chatMessages = [
       { role: "system" as const, content: SYSTEM_PROMPT },
-      ...trimmedMessages.map((m) => ({
+      ...body.messages.map((m) => ({
         role: m.role,
         content: m.content,
       })),
     ];
 
+    // 4) Llamar a OpenAI
     const completion = await client.chat.completions.create({
-      model: CHAT_MODEL,
+      model: "gpt-4.1-mini", // ✅ modelo real del API
       messages: chatMessages,
       temperature: 0.5,
     });
 
     const reply =
-      completion.choices?.[0]?.message?.content?.trim() ??
+      completion.choices?.[0]?.message?.content?.trim() ||
       "Perdón, tuve un problema al responder. Intenta de nuevo.";
 
+    // 5) Responder al frontend
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Error en /api/futura-bot:", err);
