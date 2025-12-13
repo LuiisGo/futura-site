@@ -2,6 +2,9 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
+// Fuerza runtime Node en Netlify/Next
+export const runtime = "nodejs";
+
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -218,7 +221,12 @@ type IncomingChatMessage = {
 
 export async function POST(req: Request) {
   try {
-    // 1) Validar API key
+    const body = (await req.json()) as { messages?: IncomingChatMessage[] };
+
+    if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
+      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
+    }
+
     if (!process.env.OPENAI_API_KEY) {
       console.error("Falta OPENAI_API_KEY");
       return NextResponse.json(
@@ -227,14 +235,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2) Leer body
-    const body = (await req.json()) as { messages?: IncomingChatMessage[] };
-
-    if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
-      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
-    }
-
-    // 3) Armar historial para el modelo
     const chatMessages = [
       { role: "system" as const, content: SYSTEM_PROMPT },
       ...body.messages.map((m) => ({
@@ -243,18 +243,17 @@ export async function POST(req: Request) {
       })),
     ];
 
-    // 4) Llamar a OpenAI
-    const completion = await client.chat.completions.create({
-      model: "gpt-4.1-mini", // ✅ modelo real del API
-      messages: chatMessages,
+    // API nueva: Responses
+    const response = await client.responses.create({
+      model: "gpt-4.1-mini", // modelo rápido/barato y reciente
+      input: chatMessages,
       temperature: 0.5,
     });
 
     const reply =
-      completion.choices?.[0]?.message?.content?.trim() ||
+      (response.output_text && response.output_text.trim()) ||
       "Perdón, tuve un problema al responder. Intenta de nuevo.";
 
-    // 5) Responder al frontend
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Error en /api/futura-bot:", err);
