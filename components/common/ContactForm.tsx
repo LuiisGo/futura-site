@@ -1,169 +1,209 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
-type Status = "idle" | "sending" | "ok" | "error";
+type FormState = {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  country: string;
+  sector: string;
+  message: string;
+};
+
+const INITIAL_FORM: FormState = {
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  country: "",
+  sector: "",
+  message: "",
+};
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
+  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
-
-    const formData = new FormData(e.currentTarget);
-
-    const payload = {
-      source: "contact_page",
-      name: String(formData.get("name") || ""),
-      email: String(formData.get("email") || ""),
-      phone: String(formData.get("phone") || ""),
-      company: String(formData.get("company") || ""),
-      country: String(formData.get("country") || ""),
-      sector: String(formData.get("sector") || ""),
-      message: String(formData.get("message") || ""),
-    };
+    setIsSubmitting(true);
+    setStatus("idle");
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source: "contact_page",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          country: form.country,
+          sector: form.sector,
+          message: form.message,
+        }),
       });
 
       if (!res.ok) {
-        console.error("API /api/contact respondió NOT OK", await res.text());
-        throw new Error("API not ok");
+        throw new Error("Respuesta no OK");
       }
 
+      // Si todo salió bien, limpiamos el form y mostramos mensaje de éxito
+      setForm(INITIAL_FORM);
       setStatus("ok");
-      e.currentTarget.reset();
-    } catch (err) {
-      console.error("Error enviando formulario:", err);
+    } catch (error) {
+      console.error("Error enviando formulario", error);
       setStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
-  };
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+      className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 space-y-5"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             Nombre completo*
           </label>
           <input
             name="name"
-            type="text"
+            value={form.name}
+            onChange={handleChange}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            placeholder="Juan Pérez"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             Correo electrónico*
           </label>
           <input
-            name="email"
             type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            placeholder="tu@empresa.com"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             Teléfono / WhatsApp
           </label>
           <input
             name="phone"
-            type="tel"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            placeholder="+502..."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             Empresa
           </label>
           <input
             name="company"
-            type="text"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            value={form.company}
+            onChange={handleChange}
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            placeholder="Nombre de la empresa"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             País / ciudad
           </label>
           <input
             name="country"
-            type="text"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            value={form.country}
+            onChange={handleChange}
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            placeholder="Guatemala, CDMX, etc."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-700 mb-1">
             Sector
           </label>
           <select
             name="sector"
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+            value={form.sector}
+            onChange={handleChange}
+            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
           >
-            <option value="">Selecciona una opción</option>
-            <option value="agroindustria">Agroindustria / alimentos</option>
-            <option value="retail">Retail / tiendas</option>
-            <option value="servicios">Servicios</option>
-            <option value="manufactura">Manufactura</option>
-            <option value="logistica">Logística / transporte</option>
-            <option value="otro">Otro</option>
+            <option value="">Selecciona tu sector</option>
+            <option value="Agroindustria / alimentos">
+              Agroindustria / alimentos
+            </option>
+            <option value="Retail / tiendas">Retail / tiendas</option>
+            <option value="Logística / transporte">
+              Logística / transporte
+            </option>
+            <option value="Servicios">Servicios</option>
+            <option value="Manufactura">Manufactura</option>
+            <option value="Otro">Otro</option>
           </select>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700">
+        <label className="block text-sm font-medium text-slate-700 mb-1">
           Cuéntanos brevemente qué quisieras ordenar / automatizar
         </label>
         <textarea
           name="message"
+          value={form.message}
+          onChange={handleChange}
           rows={4}
-          className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#6C4DE6] focus:ring-2 focus:ring-[#6C4DE6]/20"
+          className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+          placeholder="Por ejemplo: órdenes de compra, inventarios de bodegas, rutas de reparto, etc."
         />
       </div>
 
-      <div className="pt-2 flex flex-col gap-2">
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="inline-flex items-center justify-center rounded-full bg-[#6C4DE6] px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-[#5b3fd1] disabled:opacity-60 disabled:cursor-not-allowed"
-        >
-          {status === "sending"
-            ? "Enviando..."
-            : "Agendar diagnóstico gratuito"}
-        </button>
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="inline-flex items-center justify-center rounded-full bg-[#6f4ff6] px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-[#5a3ee0] disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? "Enviando..." : "Agendar diagnóstico gratuito"}
+      </button>
 
-        {status === "ok" && (
-          <p className="text-sm text-emerald-600">
-            ¡Listo! Recibimos tu información. Te contactaremos pronto para
-            agendar la llamada.
-          </p>
-        )}
+      {status === "error" && (
+        <p className="mt-2 text-sm text-red-500">
+          Hubo un problema al enviar. Intenta de nuevo o escríbenos por
+          WhatsApp.
+        </p>
+      )}
 
-        {status === "error" && (
-          <p className="text-sm text-rose-600">
-            Hubo un problema al enviar. Intenta de nuevo o escríbenos por
-            WhatsApp.
-          </p>
-        )}
-      </div>
+      {status === "ok" && (
+        <p className="mt-2 text-sm text-emerald-600">
+          ¡Listo! Recibimos tu información. Te contactaremos pronto para
+          agendar el diagnóstico.
+        </p>
+      )}
     </form>
   );
 }
