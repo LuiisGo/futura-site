@@ -6,6 +6,9 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Si quieres cambiar de modelo, cambia SOLO esta constante
+const CHAT_MODEL = "gpt-5.2-chat-latest"; // o "gpt-4.1-mini" si quieres algo más barato
+
 const SYSTEM_PROMPT = `
 Eres FUTURA Bot, el asistente virtual oficial de FUTURA, un estudio de digitalización y automatización para PYMES.
 
@@ -218,38 +221,50 @@ type IncomingChatMessage = {
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      console.error("Falta OPENAI_API_KEY");
+      return NextResponse.json(
+        { error: "Config error: falta OPENAI_API_KEY" },
+        { status: 500 }
+      );
+    }
+
     const body = (await req.json()) as { messages?: IncomingChatMessage[] };
 
     if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
-      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing messages array" },
+        { status: 400 }
+      );
     }
 
-    if (!process.env.OPENAI_API_KEY) {
-      console.error("Falta OPENAI_API_KEY");
-      return NextResponse.json({ error: "Config error" }, { status: 500 });
-    }
+    // Limitar historial por si acaso (por ejemplo a las últimas 15)
+    const trimmedMessages = body.messages.slice(-15);
 
     const chatMessages = [
       { role: "system" as const, content: SYSTEM_PROMPT },
-      ...body.messages.map((m) => ({
+      ...trimmedMessages.map((m) => ({
         role: m.role,
         content: m.content,
       })),
     ];
 
     const completion = await client.chat.completions.create({
-      model: "gpt-5.1-mini", // puedes cambiar de modelo si quieres
+      model: CHAT_MODEL,
       messages: chatMessages,
       temperature: 0.5,
     });
 
     const reply =
-      completion.choices?.[0]?.message?.content?.trim() ||
+      completion.choices?.[0]?.message?.content?.trim() ??
       "Perdón, tuve un problema al responder. Intenta de nuevo.";
 
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Error en /api/futura-bot:", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Server error" },
+      { status: 500 }
+    );
   }
 }
