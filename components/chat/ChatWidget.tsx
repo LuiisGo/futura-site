@@ -86,7 +86,7 @@ export default function ChatWidget() {
         company: lead.company,
         country: lead.country,
         sector: lead.sector || "Otro",
-        message: `Dolor principal: ${
+        message: `problema principal: ${
           lead.pain || "no especificado"
         }. Tamaño aproximado de la empresa: ${lead.size || "no especificado"}.`,
       };
