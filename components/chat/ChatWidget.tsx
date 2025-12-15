@@ -109,7 +109,7 @@ export default function ChatWidget() {
         company: "",
         country: "",
         sector: "",
-        pain: "",
+        problema: "",
         size: "",
       });
 
@@ -538,7 +538,7 @@ function BookingView({
   const steps = [
     "¿En qué país está tu empresa?",
     "¿En qué sector operas?",
-    "¿Cuál es hoy tu principal dolor?",
+    "¿Cuál es hoy tu principal problema?",
     "Tamaño aproximado de la empresa",
     "Datos de contacto",
   ];
