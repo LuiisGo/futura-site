@@ -109,7 +109,7 @@ export default function ChatWidget() {
         company: "",
         country: "",
         sector: "",
-        problema: "",
+        pain: "",
         size: "",
       });
 
