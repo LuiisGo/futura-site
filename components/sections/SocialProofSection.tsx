@@ -57,7 +57,7 @@ export default function SocialProofSection() {
         <div className="flex items-end justify-between gap-6 flex-col md:flex-row">
           <div className="max-w-2xl">
             <p className="text-xs tracking-[0.2em] uppercase text-slate-500">
-              Evidencia (sin humo)
+              Evidencia 
             </p>
             <h2 className="mt-2 text-2xl md:text-3xl font-semibold text-[#362263]">
               Proyectos, demos y cómo se ve en la práctica
@@ -122,7 +122,7 @@ export default function SocialProofSection() {
           <div className="flex items-center gap-2">
             <FiLayers className="text-[#362263]" />
             <p className="text-sm md:text-base font-semibold text-slate-900">
-              Resultados típicos (sin prometer milagros)
+              Resultados
             </p>
           </div>
 
