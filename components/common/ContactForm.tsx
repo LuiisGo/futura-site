@@ -86,7 +86,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
-            placeholder="Juan Pérez"
+            placeholder="Tu Nombre"
           />
         </div>
 
@@ -114,7 +114,7 @@ export default function ContactForm() {
             value={form.phone}
             onChange={handleChange}
             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
-            placeholder="+502..."
+            placeholder="+000..."
           />
         </div>
 
@@ -140,7 +140,7 @@ export default function ContactForm() {
             value={form.country}
             onChange={handleChange}
             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
-            placeholder="Guatemala, CDMX, etc."
+            placeholder="Guatemala, CDMX, El Salvador, etc."
           />
         </div>
 
@@ -182,6 +182,14 @@ export default function ContactForm() {
           placeholder="Por ejemplo: órdenes de compra, inventarios de bodegas, rutas de reparto, etc."
         />
       </div>
+<div className="space-y-1">
+  <p className="text-xs text-slate-500">
+    No compartimos tu información. Solo la usamos para contactarte y preparar el diagnóstico.
+  </p>
+  <p className="text-xs text-slate-500">
+    Tiempo típico de respuesta: dentro de 24 horas hábiles.
+  </p>
+</div>
 
       <button
         type="submit"
