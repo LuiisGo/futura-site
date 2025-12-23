@@ -3,15 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCheck, FiGlobe, FiZap, FiMessageCircle } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiCheck,
+  FiGlobe,
+  FiZap,
+  FiMessageCircle,
+  FiTrendingUp,
+} from "react-icons/fi";
 
 const items = [
   {
-    title: "Desarrollo web",
-    subtitle: "Obten presencia digital.",
+    title: "Desarrollo web (sitios que convierten)",
+    subtitle: "Web clara, rápida y lista para vender.",
     points: [
-      "Landing / web corporativa",
-      "Presencia en la web",
+      "Landing / web corporativa en Next.js",
+      "Formularios conectados + trazabilidad",
       "Optimizada para confianza y conversiones",
     ],
     icon: FiGlobe,
@@ -19,28 +26,58 @@ const items = [
     cta: { label: "Ver demo", href: "/contacto" },
   },
   {
-    title: "Automatización / sistematización",
+    title: "Automatización / sistematización (flujo real)",
     subtitle: "Del dato a la acción, sin retrabajo.",
     points: [
       "Lead → CRM/Sheet → email → alertas",
-      "Aprobaciones y trazabilidad por rol",
-      "Dashboards operativos",
+      "Aprobaciones y control por rol",
+      "Dashboards operativos para el dueño",
     ],
     icon: FiZap,
     img: "/demo-automation.png",
     cta: { label: "Ver demo", href: "/contacto" },
   },
   {
-    title: "Bots e IA integrada (Web/WhatsApp)",
-    subtitle: "Atención ordenada + captura de datos + handoff humano.",
+    title: "Bots e IA (Web/WhatsApp)",
+    subtitle: "Atención ordenada + captura + handoff humano.",
     points: [
       "Menú y preguntas inteligentes",
       "Captura de datos estructurada",
-      "Chats internos o recepcionista virtual",
+      "Escala a humano cuando importa",
     ],
     icon: FiMessageCircle,
     img: "/demo-bot.png",
     cta: { label: "Ver demo", href: "/contacto" },
+  },
+];
+
+const outcomes = [
+  {
+    title: "Desarrollo web",
+    items: [
+      "Más solicitudes calificadas desde el sitio (sin fricción)",
+      "Mensaje claro: qué hacés + por qué confiar",
+      "Formularios conectados (registro + seguimiento)",
+      "Presencia más profesional para cerrar reuniones",
+    ],
+  },
+  {
+    title: "Automatización / sistemas",
+    items: [
+      "Menos retrabajo y menos pasos manuales",
+      "Menos datos repetidos y menos errores por copia/pega",
+      "Visibilidad diaria (tablero/KPIs para el dueño)",
+      "Alertas y seguimiento ordenado por responsables",
+    ],
+  },
+  {
+    title: "Bots / IA",
+    items: [
+      "Respuestas más rápidas y atención más ordenada",
+      "Captura de datos completa antes del contacto humano",
+      "Menos chats perdidos y mejor continuidad de conversación",
+      "Resumen para tu equipo (contexto listo para actuar)",
+    ],
   },
 ];
 
@@ -57,14 +94,14 @@ export default function Evidence() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
-              Evidencia
+              Evidencia (sin humo)
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
               Lo que entregamos y cómo se ve en la práctica
             </h2>
             <p className="text-sm md:text-base text-slate-600 max-w-2xl">
-              En B2B, la confianza se gana mostrando el trabajo: sistemas, automatizaciones,
-              bots y webs listas para operar.
+              En B2B, la confianza se gana mostrando el trabajo: webs, sistemas,
+              automatizaciones y bots listos para operar.
             </p>
           </div>
 
@@ -76,6 +113,7 @@ export default function Evidence() {
           </Link>
         </div>
 
+        {/* Cards */}
         <div className="grid md:grid-cols-3 gap-4 mt-6">
           {items.map((it) => {
             const Icon = it.icon;
@@ -112,7 +150,10 @@ export default function Evidence() {
 
                   <ul className="mt-4 space-y-2">
                     {it.points.map((p) => (
-                      <li key={p} className="flex gap-2 text-xs md:text-sm text-slate-700">
+                      <li
+                        key={p}
+                        className="flex gap-2 text-xs md:text-sm text-slate-700"
+                      >
                         <span className="mt-0.5 text-[#362263]">
                           <FiCheck />
                         </span>
@@ -131,6 +172,44 @@ export default function Evidence() {
               </div>
             );
           })}
+        </div>
+
+        {/* Resultados típicos (coherentes) */}
+        <div className="mt-6 border border-slate-200 rounded-2xl p-5 bg-slate-50/50">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-[#362263]">
+              <FiTrendingUp />
+            </span>
+            <h3 className="text-sm md:text-base font-semibold text-slate-900">
+              Resultados típicos (sin prometer milagros)
+            </h3>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {outcomes.map((block) => (
+              <div
+                key={block.title}
+                className="bg-white border border-slate-200 rounded-2xl p-4"
+              >
+                <p className="text-sm font-semibold text-[#362263] mb-3">
+                  {block.title}
+                </p>
+                <ul className="space-y-2">
+                  {block.items.map((t) => (
+                    <li
+                      key={t}
+                      className="flex gap-2 text-xs md:text-sm text-slate-700"
+                    >
+                      <span className="mt-0.5 text-[#362263]">
+                        <FiCheck />
+                      </span>
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </section>
