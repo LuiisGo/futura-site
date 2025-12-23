@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/servicios", label: "Servicios" },
   { href: "/sectores", label: "Sectores" },
   { href: "/sobre-futura", label: "Sobre FUTURA" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/seguridad", label: "Seguridad" },
 ];
 
 export default function Navbar() {
@@ -49,6 +49,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
           <Link
             href="/contacto"
             className="text-sm font-semibold px-4 py-2 rounded-full bg-[#362263] text-white hover:bg-[#2c1a50] transition-colors shadow-sm"
@@ -79,6 +80,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+
             <Link
               href="/contacto"
               onClick={() => setOpen(false)}
