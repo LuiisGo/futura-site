@@ -6,7 +6,7 @@ const steps = [
   {
     title: "1. Diagnóstico",
     description:
-      "Conversamos sobre tu operación, sistemas actuales y principales dolores. Mapeamos procesos clave y definimos quick wins.",
+      "Conversamos sobre tu operación, sistemas actuales y principales fricciones. Mapeamos procesos clave y definimos quick wins."
   },
   {
     title: "2. Diseño del sistema",
