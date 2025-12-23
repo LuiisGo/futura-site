@@ -14,10 +14,10 @@ import {
 
 const items = [
   {
-    title: "Desarrollo web (sitios que convierten)",
-    subtitle: "Web clara, rápida y lista para vender.",
+    title: "Desarrollo web",
+    subtitle: "Presencia digital.",
     points: [
-      "Landing / web corporativa en Next.js",
+      "Landing / web corporativa",
       "Formularios conectados + trazabilidad",
       "Optimizada para confianza y conversiones",
     ],
@@ -26,12 +26,12 @@ const items = [
     cta: { label: "Ver demo", href: "/contacto" },
   },
   {
-    title: "Automatización / sistematización (flujo real)",
-    subtitle: "Del dato a la acción, sin retrabajo.",
+    title: "Automatización / sistematización",
+    subtitle: "Del dato a la acción, sin rodeos.",
     points: [
       "Lead → CRM/Sheet → email → alertas",
       "Aprobaciones y control por rol",
-      "Dashboards operativos para el dueño",
+      "Dashboards operativos",
     ],
     icon: FiZap,
     img: "/demo-automation.png",
@@ -43,7 +43,7 @@ const items = [
     points: [
       "Menú y preguntas inteligentes",
       "Captura de datos estructurada",
-      "Escala a humano cuando importa",
+      "Secretaria virtual o vendedor estrella",
     ],
     icon: FiMessageCircle,
     img: "/demo-bot.png",
@@ -55,7 +55,7 @@ const outcomes = [
   {
     title: "Desarrollo web",
     items: [
-      "Más solicitudes calificadas desde el sitio (sin fricción)",
+      "Más solicitudes calificadas desde el sitio",
       "Mensaje claro: qué hacés + por qué confiar",
       "Formularios conectados (registro + seguimiento)",
       "Presencia más profesional para cerrar reuniones",
@@ -64,9 +64,9 @@ const outcomes = [
   {
     title: "Automatización / sistemas",
     items: [
-      "Menos retrabajo y menos pasos manuales",
+      "Menos trabajo repetitivo y menos pasos manuales",
       "Menos datos repetidos y menos errores por copia/pega",
-      "Visibilidad diaria (tablero/KPIs para el dueño)",
+      "Visibilidad diaria",
       "Alertas y seguimiento ordenado por responsables",
     ],
   },
@@ -94,7 +94,7 @@ export default function Evidence() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
-              Evidencia (sin humo)
+              Evidencia
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
               Lo que entregamos y cómo se ve en la práctica
@@ -181,7 +181,7 @@ export default function Evidence() {
               <FiTrendingUp />
             </span>
             <h3 className="text-sm md:text-base font-semibold text-slate-900">
-              Resultados típicos (sin prometer milagros)
+              Resultados
             </h3>
           </div>
 
