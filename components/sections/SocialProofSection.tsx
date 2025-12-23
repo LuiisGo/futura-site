@@ -7,11 +7,11 @@ import { FiArrowRight, FiCheck, FiGlobe, FiZap, FiMessageCircle } from "react-ic
 
 const items = [
   {
-    title: "Desarrollo web (sitios que convierten)",
-    subtitle: "Web clara, rápida y lista para vender.",
+    title: "Desarrollo web",
+    subtitle: "Obten presencia digital.",
     points: [
-      "Landing / web corporativa en Next.js",
-      "Formularios conectados + analítica",
+      "Landing / web corporativa",
+      "Presencia en la web",
       "Optimizada para confianza y conversiones",
     ],
     icon: FiGlobe,
@@ -19,24 +19,24 @@ const items = [
     cta: { label: "Ver demo", href: "/contacto" },
   },
   {
-    title: "Automatización / sistematización (flujo real)",
+    title: "Automatización / sistematización",
     subtitle: "Del dato a la acción, sin retrabajo.",
     points: [
       "Lead → CRM/Sheet → email → alertas",
       "Aprobaciones y trazabilidad por rol",
-      "Dashboards operativos para el dueño",
+      "Dashboards operativos",
     ],
     icon: FiZap,
     img: "/demo-automation.png",
     cta: { label: "Ver demo", href: "/contacto" },
   },
   {
-    title: "Bots e IA (Web/WhatsApp)",
+    title: "Bots e IA integrada (Web/WhatsApp)",
     subtitle: "Atención ordenada + captura de datos + handoff humano.",
     points: [
       "Menú y preguntas inteligentes",
       "Captura de datos estructurada",
-      "Escala a humano cuando importa",
+      "Chats internos o recepcionista virtual",
     ],
     icon: FiMessageCircle,
     img: "/demo-bot.png",
@@ -57,7 +57,7 @@ export default function Evidence() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
-              Evidencia (sin humo)
+              Evidencia
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
               Lo que entregamos y cómo se ve en la práctica
