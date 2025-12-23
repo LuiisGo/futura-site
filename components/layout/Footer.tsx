@@ -18,7 +18,7 @@ export default function Footer() {
           <div>
             <p className="text-sm font-semibold text-[#362263]">FUTURA</p>
             <p className="text-xs text-slate-500">
-              Automatización y ERP-lite para PYMES en Guatemala y LATAM.
+              Automatización, ERP e IA para PYMES en Guatemala y LATAM.
             </p>
           </div>
         </div>
