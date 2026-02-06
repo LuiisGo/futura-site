@@ -62,7 +62,7 @@ export default function IntroOverlay() {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <Image
-              src="/logo-futura-gradient.png"
+              src="/Futurawhite.png"
               alt="FUTURA"
               width={220}
               height={60}
