@@ -1,3 +1,4 @@
+import IntroOverlay from "../components/layout/IntroOverlay";
 import Hero from "../components/sections/Hero";
 import Problem from "../components/sections/Problem";
 import Solution from "../components/sections/Solution";
@@ -13,6 +14,7 @@ import FAQ from "../components/sections/FAQ";
 export default function HomePage() {
   return (
     <>
+      <IntroOverlay />
       <Hero />
       <Problem />
       <Solution />
