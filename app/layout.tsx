@@ -5,9 +5,38 @@ import Footer from "../components/layout/Footer";
 import ChatWidget from "../components/chat/ChatWidget";
 
 export const metadata: Metadata = {
-  title: "FUTURA | WORK LESS, LIVE MORE",
+  title: "FUTURA | Digitalización y automatización con IA para PYMEs — Guatemala",
   description:
-    "FUTURA: consultora de digitalización, automatización e inteligencia artificial aplicada para PYMES. Convertimos papel, WhatsApp y sistemas dispersos en flujos digitales inteligentes, medibles y listos para crecer.",
+    "FUTURA digitaliza y automatiza los procesos de tu empresa usando IA y herramientas nocode. Desde WhatsApp y Excel hasta un sistema ordenado. Para PYMEs en Guatemala y Centroamérica. Diagnóstico gratuito.",
+  keywords: [
+    "automatización de procesos Guatemala",
+    "digitalización pymes centroamerica",
+    "ERP lite Guatemala",
+    "automatización nocode Guatemala",
+    "n8n Guatemala",
+    "sistema de inventarios pymes Guatemala",
+    "chatbot WhatsApp empresas Guatemala",
+    "digitalización empresas Guatemala",
+    "automatización empresas centroamerica",
+  ],
+  openGraph: {
+    title: "FUTURA | Digitalización y automatización con IA para PYMEs",
+    description:
+      "Digitalizamos y automatizamos tu operación. Sin ERP gigante, sin código. Para PYMEs en Guatemala y Centroamérica. Diagnóstico gratuito.",
+    url: "https://futuratt.com",
+    siteName: "FUTURA",
+    locale: "es_GT",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FUTURA | Digitalización y automatización con IA para PYMEs",
+    description:
+      "Digitalizamos y automatizamos tu operación. Para PYMEs en Guatemala y Centroamérica.",
+  },
+  alternates: {
+    canonical: "https://futuratt.com",
+  },
 };
 
 export default function RootLayout({
