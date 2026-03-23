@@ -23,7 +23,7 @@ const items = [
     ],
     icon: FiGlobe,
     img: "/demo-erp.png",
-    cta: { label: "Ver demo", href: "/contacto" },
+    cta: { label: "Agendar demo", href: "/contacto" },
   },
   {
     title: "Automatización / sistematización",
@@ -35,7 +35,7 @@ const items = [
     ],
     icon: FiZap,
     img: "/demo-automation.png",
-    cta: { label: "Ver demo", href: "/contacto" },
+    cta: { label: "Agendar demo", href: "/contacto" },
   },
   {
     title: "Bots e IA (Web/WhatsApp)",
@@ -47,7 +47,7 @@ const items = [
     ],
     icon: FiMessageCircle,
     img: "/demo-bot.png",
-    cta: { label: "Ver demo", href: "/contacto" },
+    cta: { label: "Agendar demo", href: "/contacto" },
   },
 ];
 
@@ -174,7 +174,7 @@ export default function Evidence() {
           })}
         </div>
 
-        {/* Resultados típicos (coherentes) */}
+        {/* Resultados típicos */}
         <div className="mt-6 border border-slate-200 rounded-2xl p-5 bg-slate-50/50">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[#362263]">
@@ -213,5 +213,7 @@ export default function Evidence() {
         </div>
       </motion.div>
     </section>
+  );
+}
   );
 }
