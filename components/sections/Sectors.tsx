@@ -70,11 +70,25 @@ export default function Sectors() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
           {sectors.map((s) => (
-            <div
+            <motion.div
               key={s.title}
-              className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+              }}
+              whileHover={{ y: -3 }}
+              className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow"
             >
               <h3 className="text-sm font-semibold text-[#362263] mb-1.5">
                 {s.title}
@@ -82,9 +96,9 @@ export default function Sectors() {
               <p className="text-xs md:text-sm text-slate-600">
                 {s.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

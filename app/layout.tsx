@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import ChatWidget from "../components/chat/ChatWidget";
+import PageTransition from "../components/layout/PageTransition";
+
+const CustomCursor = dynamic(() => import("../components/common/CustomCursor"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "FUTURA | Digitalización y automatización con IA para PYMEs — Guatemala",
@@ -48,9 +52,12 @@ export default function RootLayout({
     <html lang="es">
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
         <Navbar />
-        <main className="pt-16 md:pt-20">{children}</main>
+        <main className="pt-16 md:pt-20">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <ChatWidget />
+        <CustomCursor />
       </body>
     </html>
   );

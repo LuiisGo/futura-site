@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { useState, useEffect, useRef } from "react";
+import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
+import { AnimatePresence, motion } from "framer-motion";
 
 const WHATSAPP_URL =
   "https://wa.me/50233813895?text=Hola%20FUTURA%21%20Quiero%20agendar%20un%20diagnostico%20gratuito%20%2830-45%20min%29.%20Cual%20es%20el%20siguiente%20paso%3F";
@@ -14,16 +15,39 @@ const INSTAGRAM_URL =
 const FACEBOOK_URL =
   "https://www.facebook.com/share/1Ej8WkoULm/?mibextid=wwXIfr";
 
-const navLinks = [
-  { href: "/", label: "Inicio" },
+const primaryLinks = [
   { href: "/servicios", label: "Servicios" },
   { href: "/sectores", label: "Sectores" },
+  { href: "/termometro", label: "Termómetro" },
+  { href: "/wallet", label: "Wallet" },
+];
+
+const moreLinks = [
+  { href: "/casos", label: "Casos de éxito" },
   { href: "/sobre-futura", label: "Sobre FUTURA" },
   { href: "/seguridad", label: "Seguridad" },
 ];
 
+const allMobileLinks = [
+  ...primaryLinks,
+  ...moreLinks,
+  { href: "/contacto", label: "Contacto" },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed top-0 inset-x-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
@@ -50,7 +74,7 @@ export default function Navbar() {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          {primaryLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -59,6 +83,43 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
+          {/* Más dropdown */}
+          <div className="relative" ref={moreRef}>
+            <button
+              onClick={() => setMoreOpen((v) => !v)}
+              className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:text-[#362263] transition-colors"
+            >
+              Más
+              <FiChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {moreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 rounded-xl border border-slate-200 bg-white shadow-lg min-w-[180px]"
+                >
+                  {moreLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMoreOpen(false)}
+                      className="block py-2 px-4 text-sm font-medium text-slate-700 hover:text-[#362263] hover:bg-slate-50 transition-colors first:rounded-t-xl last:rounded-b-xl"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Social icons (solo desktop) */}
           <div className="hidden lg:flex items-center gap-2">
@@ -136,7 +197,7 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t border-slate-200 bg-white">
           <div className="max-w-6xl mx-auto px-4 py-3 space-y-2">
-            {navLinks.map((link) => (
+            {allMobileLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

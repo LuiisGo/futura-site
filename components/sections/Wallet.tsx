@@ -1,64 +1,147 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function Wallet() {
-  return (
-    <section className="max-w-6xl mx_auto px-4 py-10 md:py-14">
+function WalletDemoModal({ onClose }: { onClose: () => void }) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  return createPortal(
+    <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
-        className="grid md:grid-cols-[1.2fr,1fr] gap-8 items-center bg-[#362263] text-white rounded-3xl px-5 md:px-8 py-7 md:py-10"
+        key="wallet-demo-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
       >
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#B3B1CA] mb-2">
-            FUTURA WALLET
-          </p>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-3">
-            Lealtad y club de clientes, conectado a tu operación.
-          </h2>
-          <p className="text-sm md:text-base text-slate-100/90 mb-4">
-            FUTURA Wallet es una solución de lealtad basada en QR/NFC + WhatsApp
-            que combina automatización e inteligencia artificial para segmentar
-            mejor a tus clientes. Asigna puntos, cupones y gift cards mientras
-            construyes un mini-CRM de recurrencia sin salir de tu ecosistema.
-          </p>
-          <ul className="space-y-2 text-xs md:text-sm text-slate-100/90">
-            <li>
-              • Identificación rápida de clientes con QR o tarjeta NFC.
-            </li>
-            <li>
-              • Puntos y recompensas configurables por segmento.
-            </li>
-            <li>
-              • Campañas dirigidas por WhatsApp potenciadas con IA para elegir
-              el mejor mensaje y momento para cada segmento.
-            </li>
-            <li>
-              • Integración con tu sistema operativo digital y dashboards.
-            </li>
-          </ul>
-        </div>
-        <div className="space-y-3">
-          <div className="overflow-hidden rounded-2xl bg-white/5 border border-white/20">
-            <Image
-              src="/illu-ecosystem.jpg"
-              alt="Ecosistema de canales y módulos conectados a FUTURA Wallet"
-              width={900}
-              height={720}
-              className="w-full h-full object-cover"
+        <motion.div
+          key="wallet-demo-modal"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ duration: 0.25 }}
+          className="max-w-4xl w-full mx-4 rounded-2xl overflow-hidden bg-[#13102a] border border-white/10"
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-white/10">
+            <span className="text-sm font-semibold text-white">
+              FUTURA Wallet &mdash; Demo
+            </span>
+            <button
+              onClick={onClose}
+              className="text-white/70 hover:text-white transition-colors text-lg leading-none"
+              aria-label="Cerrar"
+            >
+              &#x2715;
+            </button>
+          </div>
+
+          {/* Body */}
+          <div className="relative">
+            {!loaded && (
+              <div className="absolute inset-0 animate-pulse bg-white/10 h-[400px] md:h-[600px]" />
+            )}
+            <iframe
+              src="https://futura-wallet.onrender.com"
+              title="FUTURA Wallet Demo"
+              className="w-full h-[400px] md:h-[600px]"
+              onLoad={() => setLoaded(true)}
             />
           </div>
-          <p className="text-[11px] text-slate-100/85">
-            FUTURA Wallet se conecta con tus ventas, inventarios y campañas para
-            premiar a los clientes correctos, en el momento correcto, con ayuda
-            de automatización e IA.
-          </p>
-        </div>
+        </motion.div>
       </motion.div>
-    </section>
+    </AnimatePresence>,
+    document.body
+  );
+}
+
+export default function Wallet() {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <>
+      <section className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-[1.2fr,1fr] gap-8 items-center bg-[#362263] text-white rounded-3xl px-5 md:px-8 py-7 md:py-10"
+        >
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-[#B3B1CA] mb-2">
+              FUTURA WALLET
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">
+              Lealtad y club de clientes, conectado a tu operación.
+            </h2>
+            <p className="text-sm md:text-base text-slate-100/90 mb-4">
+              FUTURA Wallet es una solución de lealtad basada en QR/NFC + WhatsApp
+              que combina automatización e inteligencia artificial para segmentar
+              mejor a tus clientes. Asigna puntos, cupones y gift cards mientras
+              construyes un mini-CRM de recurrencia sin salir de tu ecosistema.
+            </p>
+            <ul className="space-y-2 text-xs md:text-sm text-slate-100/90">
+              <li>
+                • Identificación rápida de clientes con QR o tarjeta NFC.
+              </li>
+              <li>
+                • Puntos y recompensas configurables por segmento.
+              </li>
+              <li>
+                • Campañas dirigidas por WhatsApp potenciadas con IA para elegir
+                el mejor mensaje y momento para cada segmento.
+              </li>
+              <li>
+                • Integración con tu sistema operativo digital y dashboards.
+              </li>
+            </ul>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-white text-[#362263] rounded-full px-5 py-2.5 text-sm font-semibold mt-4"
+            >
+              Ver demo en vivo &rarr;
+            </button>
+          </div>
+          <div className="space-y-3">
+            <div className="overflow-hidden rounded-2xl bg-white/5 border border-white/20 relative">
+              <iframe
+                src="https://futura-wallet.onrender.com"
+                title="FUTURA Wallet Preview"
+                className="w-full h-[320px] pointer-events-none"
+                loading="lazy"
+              />
+              <button
+                onClick={() => setShowModal(true)}
+                className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-opacity hover:bg-black/40"
+              >
+                <span className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-5 py-3 text-sm font-semibold text-white">
+                  Click para interactuar con el demo &rarr;
+                </span>
+              </button>
+            </div>
+            <p className="text-[11px] text-slate-100/85">
+              FUTURA Wallet se conecta con tus ventas, inventarios y campañas para
+              premiar a los clientes correctos, en el momento correcto, con ayuda
+              de automatización e IA.
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {showModal && <WalletDemoModal onClose={() => setShowModal(false)} />}
+    </>
   );
 }

@@ -1,31 +1,39 @@
 "use client";
 
-// components/sections/StatsBar.tsx
-// → page.tsx: DESPUÉS de <Hero />, ANTES de <Problem />
-// ⚠️  Ajustá los números con los tuyos reales antes de publicar.
-// Referencia de cálculo:
-//   Lechería San Antonio = 15h/semana × 52 semanas = 780h/año
-//   Si tenés más clientes con tiempo eliminado, sumalo al total.
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useInView } from "framer-motion";
 
-import { motion } from "framer-motion";
+function useCountUp(end: number, duration = 2000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const hasAnimated = useRef(false);
+
+  const animate = useCallback(() => {
+    if (hasAnimated.current) return;
+    hasAnimated.current = true;
+    const start = performance.now();
+    const step = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // cubic easeOut
+      setCount(Math.round(eased * end));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [end, duration]);
+
+  useEffect(() => {
+    if (inView) animate();
+  }, [inView, animate]);
+
+  return { count, ref };
+}
 
 const stats = [
-  {
-    number: "12+",
-    label: "Proyectos entregados",
-  },
-  {
-    number: "5",
-    label: "Sectores atendidos",
-  },
-  {
-    number: "780+",
-    label: "Horas de trabajo manual eliminadas",
-  },
-  {
-    number: "3",
-    label: "Países en Centroamérica",
-  },
+  { end: 12, suffix: "+", label: "Proyectos entregados" },
+  { end: 5, suffix: "+", label: "Sectores atendidos" },
+  { end: 780, suffix: "+", label: "Horas de trabajo manual eliminadas" },
+  { end: 3, suffix: "+", label: "Países en Centroamérica" },
 ];
 
 export default function StatsBar() {
@@ -40,20 +48,27 @@ export default function StatsBar() {
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center md:items-start text-center md:text-left"
-            >
-              <span className="text-4xl md:text-5xl font-bold text-[#362263] leading-none">
-                {stat.number}
-              </span>
-              <span className="mt-2 text-sm text-slate-500 leading-snug max-w-[160px]">
-                {stat.label}
-              </span>
-            </div>
+            <StatItem key={i} {...stat} />
           ))}
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function StatItem({ end, suffix, label }: { end: number; suffix: string; label: string }) {
+  const { count, ref } = useCountUp(end);
+  return (
+    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+      <span
+        ref={ref}
+        className="text-4xl md:text-5xl font-bold text-[#362263] leading-none"
+      >
+        {count}{suffix}
+      </span>
+      <span className="mt-2 text-sm text-slate-500 leading-snug max-w-[160px]">
+        {label}
+      </span>
+    </div>
   );
 }

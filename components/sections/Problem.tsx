@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import BeforeAfterSlider from "../common/BeforeAfterSlider";
 
 export default function Problem() {
   return (
@@ -43,15 +43,10 @@ export default function Problem() {
           </div>
         </div>
         <div className="space-y-3">
-          <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
-            <Image
-              src="/scene-before-after.jpg"
-              alt="Antes y después de automatizar: de caos en papel a operación ordenada con dashboards"
-              width={900}
-              height={700}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <BeforeAfterSlider
+            beforeSrc="/illustrations/caos-pyme.png"
+            afterSrc="/dashboards-scene.webp"
+          />
           <p className="text-xs md:text-sm text-slate-600">
             FUTURA te ayuda a pasar de la escena de la izquierda (papeles,
             estrés, retrabajo) a la de la derecha: una operación clara, con
