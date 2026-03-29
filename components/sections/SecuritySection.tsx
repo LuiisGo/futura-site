@@ -27,62 +27,76 @@ const pillars = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 export default function Security() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <section className="max-w-6xl mx-auto px-4 py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.45 }}
-        className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="liquid-glass rounded-3xl p-6 md:p-8"
       >
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-white/30 mb-2">
               Confianza operativa
             </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
               Seguridad y confidencialidad
             </h2>
-            <p className="text-sm md:text-base text-slate-600 max-w-2xl">
+            <p className="text-sm md:text-base text-white/40 max-w-2xl">
               Tus datos son tuyos. Nosotros construimos el sistema, pero el control lo tenés vos.
             </p>
           </div>
 
           <Link
             href="/seguridad"
-            className="inline-flex items-center justify-center rounded-full bg-[#362263] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2c1a50] transition-colors shadow-sm"
+            className="apple-btn inline-flex items-center justify-center rounded-full bg-[#7C3AED] px-5 py-2.5 text-sm font-semibold text-white"
           >
             Ver política de confidencialidad
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4 mt-6">
-          {pillars.map((p) => {
+        <div className="grid md:grid-cols-2 gap-3 mt-6">
+          {pillars.map((p, i) => {
             const Icon = p.icon;
             return (
-              <div
+              <motion.div
                 key={p.title}
-                className="border border-slate-200 rounded-2xl p-4 bg-slate-50/60 flex gap-3"
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                className="liquid-glass-subtle rounded-2xl p-4 flex gap-3 cursor-default"
               >
-                <div className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-[#362263]">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/15 flex items-center justify-center text-[#7C3AED] shrink-0">
                   <Icon size={18} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-900 mb-1">
+                  <h3 className="text-sm font-semibold text-white/90 mb-1">
                     {p.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-slate-600">{p.desc}</p>
+                  <p className="text-xs md:text-sm text-white/40 leading-relaxed">{p.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Nota final sin “recomendación” */}
-        <div className="mt-5 border border-slate-200 rounded-2xl p-4 bg-white">
-          <p className="text-xs md:text-sm text-slate-600">
+        <div className="mt-5 rounded-2xl p-4 bg-white/[0.02] border border-white/[0.06]">
+          <p className="text-xs md:text-sm text-white/35 leading-relaxed">
             Operamos con acuerdos de confidencialidad cuando el proyecto lo requiere (NDA) y dejamos
             definidos desde el inicio los accesos, responsables y canales de comunicación (llamada,
             WhatsApp Business y correo), con controles de permisos y trazabilidad.

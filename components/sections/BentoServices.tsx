@@ -74,24 +74,24 @@ const containerVariants = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function BentoServices() {
   return (
-    <section id="bento-servicios" className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <section id="bento-servicios" className="max-w-6xl mx-auto px-4 py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
               Lo que hacemos en FUTURA
             </h2>
-            <p className="text-sm md:text-base text-slate-600 max-w-xl">
+            <p className="text-sm md:text-base text-white/40 max-w-xl">
               Sistemas concretos de digitalización, automatización e inteligencia
               artificial aplicada para que tu operación funcione mejor.
             </p>
@@ -103,7 +103,7 @@ export default function BentoServices() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-5"
+          className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4"
         >
           {services.map((s) => {
             const Icon = s.icon;
@@ -113,21 +113,23 @@ export default function BentoServices() {
                 <motion.div
                   key={s.title}
                   variants={cardVariants}
-                  whileHover={{ y: -3 }}
-                  className="md:col-span-2 md:row-span-1 bg-[#362263] text-white border border-white/10 rounded-2xl p-5 md:p-8 shadow-sm hover:shadow-md transition-shadow"
+                  whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                  className="md:col-span-2 md:row-span-1 liquid-glass-strong rounded-2xl p-6 md:p-8 group cursor-default"
                 >
-                  <Icon className="text-2xl md:text-3xl mb-3 text-white/80" />
-                  <h3 className="text-base md:text-lg font-semibold mb-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/15 border border-[#7C3AED]/20 flex items-center justify-center mb-4">
+                    <Icon className="text-lg text-[#7C3AED]" />
+                  </div>
+                  <h3 className="text-base md:text-lg font-semibold text-white mb-2">
                     {s.title}
                   </h3>
-                  <p className="text-sm md:text-base text-white/80 mb-4 max-w-lg">
+                  <p className="text-sm text-white/50 mb-5 max-w-lg leading-relaxed">
                     {s.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {s.tags.map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-1 rounded-full bg-white/10 text-[11px] text-white/90"
+                        className="px-2.5 py-1 rounded-full bg-white/[0.06] text-[11px] text-white/60 border border-white/[0.06]"
                       >
                         {t}
                       </span>
@@ -141,21 +143,23 @@ export default function BentoServices() {
               <motion.div
                 key={s.title}
                 variants={cardVariants}
-                whileHover={{ y: -3 }}
-                className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow"
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                className="liquid-glass-subtle rounded-2xl p-5 md:p-6 group cursor-default"
               >
-                <Icon className="text-xl md:text-2xl mb-2 text-[#362263]" />
-                <h3 className="text-sm font-semibold text-[#362263] mb-1.5">
+                <div className="w-9 h-9 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center mb-3">
+                  <Icon className="text-base text-white/60 group-hover:text-[#7C3AED] transition-colors" />
+                </div>
+                <h3 className="text-sm font-semibold text-white mb-1.5">
                   {s.title}
                 </h3>
-                <p className="text-xs md:text-sm text-slate-600 mb-3">
+                <p className="text-xs md:text-sm text-white/40 mb-3 leading-relaxed">
                   {s.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {s.tags.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-full bg-slate-100 text-[11px] text-slate-600"
+                      className="px-2.5 py-1 rounded-full bg-white/[0.03] text-[11px] text-white/35 border border-white/[0.06]"
                     >
                       {t}
                     </span>

@@ -29,21 +29,21 @@ export default function TermometroPage() {
   return (
     <div className="pb-20">
       {/* Hero */}
-      <section className="bg-[#0b0720] text-white py-20">
+      <section className="text-white py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-5xl font-bold mb-6"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl md:text-5xl font-bold mb-6 tracking-tight"
           >
-            ¿Qué tan digital está tu empresa?
+            Descubrí en 3 minutos cuánto estás perdiendo
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-white/45 max-w-2xl mx-auto"
           >
             Completá el Termómetro Operativo en 3 minutos y recibí un
             diagnóstico personalizado con recomendaciones concretas.
@@ -70,7 +70,7 @@ export default function TermometroPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="text-2xl md:text-3xl font-bold text-[#362263] text-center mb-12"
+          className="text-2xl md:text-3xl font-bold text-white text-center mb-12"
         >
           ¿Qué pasa después?
         </motion.h2>
@@ -83,15 +83,15 @@ export default function TermometroPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.12 }}
-              className="bg-white rounded-2xl border border-slate-200 p-6 text-center shadow-sm"
+              className="liquid-glass-subtle rounded-2xl p-6 text-center"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#362263]/10 text-[#362263] mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#7C3AED]/15 text-[#a855f7] mb-4">
                 <step.icon size={24} />
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              <h3 className="text-lg font-semibold text-white/90 mb-2">
                 {step.title}
               </h3>
-              <p className="text-sm text-slate-600">{step.description}</p>
+              <p className="text-sm text-white/60">{step.description}</p>
             </motion.div>
           ))}
         </div>
@@ -105,12 +105,12 @@ export default function TermometroPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <p className="text-slate-600 mb-4">
+          <p className="text-white/60 mb-4">
             ¿Preferís hablar directamente con alguien del equipo?
           </p>
           <Link
             href="/contacto"
-            className="inline-block px-6 py-3 rounded-full bg-[#362263] text-white font-semibold hover:bg-[#2c1a50] transition-colors shadow-sm"
+            className="apple-btn inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold"
           >
             Agendar diagnóstico gratuito
           </Link>

@@ -15,7 +15,7 @@ function useCountUp(end: number, duration = 2000) {
     const start = performance.now();
     const step = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3); // cubic easeOut
+      const eased = 1 - Math.pow(1 - t, 3);
       setCount(Math.round(eased * end));
       if (t < 1) requestAnimationFrame(step);
     };
@@ -38,17 +38,17 @@ const stats = [
 
 export default function StatsBar() {
   return (
-    <section className="w-full border-y border-slate-200 bg-white">
-      <div className="max-w-6xl mx-auto px-6 py-10">
+    <section className="w-full border-y border-white/[0.06]">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {stats.map((stat, i) => (
-            <StatItem key={i} {...stat} />
+            <StatItem key={i} {...stat} delay={i * 0.1} />
           ))}
         </motion.div>
       </div>
@@ -56,19 +56,25 @@ export default function StatsBar() {
   );
 }
 
-function StatItem({ end, suffix, label }: { end: number; suffix: string; label: string }) {
+function StatItem({ end, suffix, label, delay }: { end: number; suffix: string; label: string; delay: number }) {
   const { count, ref } = useCountUp(end);
   return (
-    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center md:items-start text-center md:text-left"
+    >
       <span
         ref={ref}
-        className="text-4xl md:text-5xl font-bold text-[#362263] leading-none"
+        className="text-4xl md:text-5xl font-bold text-white tabular-nums leading-none"
       >
         {count}{suffix}
       </span>
-      <span className="mt-2 text-sm text-slate-500 leading-snug max-w-[160px]">
+      <span className="mt-2 text-sm text-white/35 leading-snug max-w-[160px]">
         {label}
       </span>
-    </div>
+    </motion.div>
   );
 }

@@ -45,7 +45,7 @@ export default function WalletPage() {
   return (
     <div className="pb-20">
       {/* Hero */}
-      <section className="bg-[#0b0720] text-white py-20">
+      <section className="text-white py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
@@ -77,7 +77,7 @@ export default function WalletPage() {
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <f.icon size={20} className="text-white" />
                 </div>
-                <span className="text-slate-200">{f.text}</span>
+                <span className="text-white/80">{f.text}</span>
               </motion.div>
             ))}
           </div>
@@ -91,11 +91,11 @@ export default function WalletPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="text-2xl md:text-3xl font-bold text-[#362263] text-center mb-4"
+          className="text-2xl md:text-3xl font-bold text-white text-center mb-4"
         >
           Mirá la demo en vivo
         </motion.h2>
-        <p className="text-slate-600 text-center mb-8 max-w-xl mx-auto">
+        <p className="text-white/60 text-center mb-8 max-w-xl mx-auto">
           Explorá el prototipo funcional de FUTURA Wallet directamente desde tu
           navegador.
         </p>
@@ -105,11 +105,11 @@ export default function WalletPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+          className="relative rounded-2xl overflow-hidden liquid-glass-subtle"
         >
           {/* Loading skeleton */}
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-100 animate-pulse">
-            <div className="w-32 h-4 rounded bg-slate-200" />
+          <div className="absolute inset-0 flex items-center justify-center bg-white/[0.03] animate-pulse">
+            <div className="w-32 h-4 rounded bg-white/10" />
           </div>
           <iframe
             src="https://futura-wallet.onrender.com"
@@ -129,7 +129,7 @@ export default function WalletPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="text-2xl md:text-3xl font-bold text-[#362263] text-center mb-12"
+          className="text-2xl md:text-3xl font-bold text-white text-center mb-12"
         >
           ¿Para quién es FUTURA Wallet?
         </motion.h2>
@@ -142,12 +142,12 @@ export default function WalletPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.12 }}
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm"
+              className="liquid-glass-subtle rounded-2xl p-6"
             >
-              <h3 className="text-lg font-semibold text-[#362263] mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2">
                 {sector.title}
               </h3>
-              <p className="text-sm text-slate-600">{sector.description}</p>
+              <p className="text-sm text-white/60">{sector.description}</p>
             </motion.div>
           ))}
         </div>
@@ -163,7 +163,7 @@ export default function WalletPage() {
         >
           <Link
             href="/contacto"
-            className="inline-block px-6 py-3 rounded-full bg-[#362263] text-white font-semibold hover:bg-[#2c1a50] transition-colors shadow-sm"
+            className="apple-btn inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold"
           >
             Agenda una demo personalizada
           </Link>

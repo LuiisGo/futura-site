@@ -4,14 +4,14 @@ import { useEffect, useState } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 
 export default function CustomCursor() {
-  const [isMobile, setIsMobile] = useState(true) // default true to avoid flash
+  const [isMobile, setIsMobile] = useState(true)
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
 
   const dotX = useSpring(cursorX, { stiffness: 800, damping: 50 })
   const dotY = useSpring(cursorY, { stiffness: 800, damping: 50 })
-  const ringX = useSpring(cursorX, { stiffness: 150, damping: 20 })
-  const ringY = useSpring(cursorY, { stiffness: 150, damping: 20 })
+  const ringX = useSpring(cursorX, { stiffness: 120, damping: 18 })
+  const ringY = useSpring(cursorY, { stiffness: 120, damping: 18 })
 
   useEffect(() => {
     const hasHover = window.matchMedia('(hover: hover)').matches
@@ -37,12 +37,12 @@ export default function CustomCursor() {
       {/* Dot */}
       <motion.div
         style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#7C3AED] z-[9999] pointer-events-none"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-white z-[9999] pointer-events-none mix-blend-difference"
       />
       {/* Ring */}
       <motion.div
         style={{ x: ringX, y: ringY, translateX: '-50%', translateY: '-50%' }}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border-[1.5px] border-[#7C3AED] z-[9999] pointer-events-none"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/30 z-[9999] pointer-events-none mix-blend-difference"
       />
     </>
   )

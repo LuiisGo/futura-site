@@ -1,4 +1,3 @@
-import IntroOverlay from "../components/layout/IntroOverlay";
 import Hero from "../components/sections/Hero";
 import StatsBar from "../components/sections/StatsBar";
 import ScrollStory from "../components/sections/ScrollStory";
@@ -17,7 +16,6 @@ import FAQ from "../components/sections/FAQ";
 export default function HomePage() {
   return (
     <>
-      <IntroOverlay />
       <Hero />
       <StatsBar />
       <ScrollStory />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronDown } from "react-icons/fi";
 
 const faqs = [
@@ -33,15 +33,14 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section className="max-w-6xl mx-auto px-4 pb-16">
+    <section className="max-w-6xl mx-auto px-4 pb-20">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.4 }}
-        className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-white mb-8 tracking-tight">
           Preguntas frecuentes
         </h2>
         <div className="space-y-2">
@@ -58,24 +57,35 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-slate-200 rounded-xl overflow-hidden">
+    <div className="border border-white/[0.06] rounded-xl overflow-hidden hover:border-white/[0.1] transition-colors">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-4 py-3 text-left"
+        className="w-full flex items-center justify-between px-5 py-4 text-left group"
       >
-        <span className="text-sm font-medium text-slate-800">{q}</span>
-        <FiChevronDown
-          className={`text-slate-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
+        <span className="text-sm font-medium text-white/80 group-hover:text-white transition-colors">{q}</span>
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <FiChevronDown className="text-white/30 shrink-0 ml-4" />
+        </motion.div>
       </button>
-      {open && (
-        <div className="px-4 pb-3 text-xs md:text-sm text-slate-600 border-t border-slate-100">
-          {a}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-4 text-sm text-white/40 border-t border-white/[0.04] pt-3 leading-relaxed">
+              {a}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

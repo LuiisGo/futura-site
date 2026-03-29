@@ -12,13 +12,13 @@ const FACEBOOK_URL =
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 mt-10">
-      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+    <footer className="border-t border-white/[0.06] mt-10">
+      <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8">
             <Image
-              src="/logo-futura-deeppurple.png"
+              src="/Futurawhite.png"
               alt="FUTURA logo"
               fill
               sizes="32px"
@@ -26,87 +26,57 @@ export default function Footer() {
             />
           </div>
           <div>
-            <p className="text-sm font-semibold text-[#362263]">FUTURA</p>
-            <p className="text-xs text-slate-500">
-              Digitalización, automatización e IA para que tu empresa trabaje con más claridad y menos fricción.
+            <p className="text-sm font-semibold text-white">FUTURA</p>
+            <p className="text-xs text-white/30">
+              Digitalización, automatización e IA para PYMEs.
             </p>
           </div>
         </div>
 
         {/* Links + Social */}
         <div className="flex flex-col md:items-end gap-3">
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-white/25">
             © {new Date().getFullYear()} FUTURA. Todos los derechos reservados.
           </span>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
-            <Link href="/contacto" className="hover:text-[#362263]">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-white/35">
+            <Link href="/contacto" className="hover:text-white transition-colors">
               Contacto
             </Link>
-
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#362263]"
+              className="hover:text-white transition-colors"
             >
               WhatsApp
             </a>
 
-            <span className="hidden md:inline-block mx-1">•</span>
+            <span className="hidden md:inline-block mx-1 text-white/15">·</span>
 
-            {/* Social Icons */}
-            <div className="flex items-center gap-2">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="WhatsApp FUTURA"
-                title="WhatsApp"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-              >
-                <Image
-                  src="/whatsapp.png"
-                  alt="WhatsApp"
-                  width={18}
-                  height={18}
-                  className="object-contain"
-                />
-              </a>
-
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram FUTURA"
-                title="Instagram"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-              >
-                <Image
-                  src="/logo-ig.png"
-                  alt="Instagram"
-                  width={18}
-                  height={18}
-                  className="object-contain"
-                />
-              </a>
-
-              <a
-                href={FACEBOOK_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook FUTURA"
-                title="Facebook"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-              >
-                <Image
-                  src="/Fb-logo.png"
-                  alt="Facebook"
-                  width={18}
-                  height={18}
-                  className="object-contain"
-                />
-              </a>
+            <div className="flex items-center gap-1.5">
+              {[
+                { href: WHATSAPP_URL, src: "/whatsapp.png", alt: "WhatsApp" },
+                { href: INSTAGRAM_URL, src: "/logo-ig.png", alt: "Instagram" },
+                { href: FACEBOOK_URL, src: "/Fb-logo.png", alt: "Facebook" },
+              ].map((s) => (
+                <a
+                  key={s.alt}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${s.alt} FUTURA`}
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.08] transition-all"
+                >
+                  <Image
+                    src={s.src}
+                    alt={s.alt}
+                    width={16}
+                    height={16}
+                    className="object-contain"
+                  />
+                </a>
+              ))}
             </div>
           </div>
         </div>

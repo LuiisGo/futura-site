@@ -81,25 +81,34 @@ const outcomes = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 export default function Evidence() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <section className="max-w-6xl mx-auto px-4 py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45 }}
-        className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="liquid-glass rounded-3xl p-6 md:p-8"
       >
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-white/30 mb-2">
               Evidencia
             </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
               Lo que entregamos y cómo se ve en la práctica
             </h2>
-            <p className="text-sm md:text-base text-slate-600 max-w-2xl">
+            <p className="text-sm md:text-base text-white/40 max-w-2xl leading-relaxed">
               En B2B, la confianza se gana mostrando el trabajo: webs, sistemas,
               automatizaciones y bots listos para operar.
             </p>
@@ -107,22 +116,28 @@ export default function Evidence() {
 
           <Link
             href="/contacto"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-200 transition-colors"
+            className="apple-btn inline-flex items-center justify-center gap-2 rounded-full bg-[#7C3AED] px-5 py-2.5 text-sm font-semibold text-white"
           >
-            Pedir demo / diagnóstico <FiArrowRight />
+            Pedir demo <FiArrowRight />
           </Link>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-4 mt-6">
-          {items.map((it) => {
+        <div className="grid md:grid-cols-3 gap-3 mt-8">
+          {items.map((it, i) => {
             const Icon = it.icon;
             return (
-              <div
+              <motion.div
                 key={it.title}
-                className="border border-slate-200 rounded-2xl overflow-hidden bg-white"
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ y: -3, transition: { duration: 0.25 } }}
+                className="liquid-glass-subtle rounded-2xl overflow-hidden cursor-default"
               >
-                <div className="relative w-full h-44 bg-slate-50">
+                <div className="relative w-full h-44 bg-white/[0.02]">
                   <Image
                     src={it.img}
                     alt={it.title}
@@ -135,14 +150,14 @@ export default function Evidence() {
 
                 <div className="p-5">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center text-[#362263]">
-                      <Icon size={18} />
+                    <div className="w-9 h-9 rounded-lg border border-white/[0.08] bg-white/[0.04] flex items-center justify-center text-[#7C3AED]">
+                      <Icon size={16} />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="text-sm font-semibold text-white/90">
                         {it.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      <p className="text-xs text-white/40 mt-0.5">
                         {it.subtitle}
                       </p>
                     </div>
@@ -150,13 +165,8 @@ export default function Evidence() {
 
                   <ul className="mt-4 space-y-2">
                     {it.points.map((p) => (
-                      <li
-                        key={p}
-                        className="flex gap-2 text-xs md:text-sm text-slate-700"
-                      >
-                        <span className="mt-0.5 text-[#362263]">
-                          <FiCheck />
-                        </span>
+                      <li key={p} className="flex gap-2 text-xs md:text-sm text-white/50">
+                        <span className="mt-0.5 text-[#7C3AED]"><FiCheck size={12} /></span>
                         <span>{p}</span>
                       </li>
                     ))}
@@ -164,45 +174,34 @@ export default function Evidence() {
 
                   <Link
                     href={it.cta.href}
-                    className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-[#362263] hover:underline"
+                    className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-[#7C3AED] hover:text-[#a855f7] transition-colors"
                   >
-                    {it.cta.label} <FiArrowRight />
+                    {it.cta.label} <FiArrowRight size={14} />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Resultados típicos */}
-        <div className="mt-6 border border-slate-200 rounded-2xl p-5 bg-slate-50/50">
+        {/* Resultados */}
+        <div className="mt-6 liquid-glass-subtle rounded-2xl p-5">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-[#362263]">
-              <FiTrendingUp />
-            </span>
-            <h3 className="text-sm md:text-base font-semibold text-slate-900">
-              Resultados
-            </h3>
+            <span className="text-[#7C3AED]"><FiTrendingUp /></span>
+            <h3 className="text-sm md:text-base font-semibold text-white/90">Resultados</h3>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-3">
             {outcomes.map((block) => (
               <div
                 key={block.title}
-                className="bg-white border border-slate-200 rounded-2xl p-4"
+                className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4"
               >
-                <p className="text-sm font-semibold text-[#362263] mb-3">
-                  {block.title}
-                </p>
+                <p className="text-sm font-semibold text-[#7C3AED] mb-3">{block.title}</p>
                 <ul className="space-y-2">
                   {block.items.map((t) => (
-                    <li
-                      key={t}
-                      className="flex gap-2 text-xs md:text-sm text-slate-700"
-                    >
-                      <span className="mt-0.5 text-[#362263]">
-                        <FiCheck />
-                      </span>
+                    <li key={t} className="flex gap-2 text-xs md:text-sm text-white/50">
+                      <span className="mt-0.5 text-[#7C3AED]"><FiCheck size={12} /></span>
                       <span>{t}</span>
                     </li>
                   ))}

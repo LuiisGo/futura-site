@@ -126,31 +126,31 @@ function ChapterCard({
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm p-6"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="liquid-glass-subtle rounded-2xl p-6"
     >
       <p className="text-xs font-semibold uppercase tracking-wider text-[#7C3AED] mb-2">
         Capítulo {index + 1}
       </p>
-      <h3 className="text-xl md:text-2xl font-semibold text-[#362263] mb-3">
+      <h3 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-tight">
         {chapter.heading}
       </h3>
       <div className="space-y-3 mb-6">
         {chapter.items.map((item) => (
           <div key={item.label} className="flex gap-3">
-            <div className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-[#3C88BA]" />
+            <div className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-[#7C3AED]" />
             <div>
-              <p className="text-sm font-semibold text-[#362263]">
+              <p className="text-sm font-semibold text-white/90">
                 {item.label}
               </p>
-              <p className="text-xs md:text-sm text-slate-600">
+              <p className="text-xs md:text-sm text-white/40 leading-relaxed">
                 {item.description}
               </p>
             </div>
           </div>
         ))}
       </div>
-      <div className="overflow-hidden rounded-xl border border-slate-100">
+      <div className="overflow-hidden rounded-xl border border-white/[0.06]">
         <Image
           src={chapter.image}
           alt={chapter.imageAlt}
@@ -196,32 +196,30 @@ function ProgressDot({
 
   return (
     <div className="flex items-start gap-3">
-      {/* Vertical line + dot */}
       <div className="flex flex-col items-center">
         {index > 0 && (
           <div
-            className={`w-px h-6 transition-colors duration-300 ${
-              isActive ? "bg-[#7C3AED]" : "bg-slate-200"
+            className={`w-px h-6 transition-all duration-500 ${
+              isActive ? "bg-[#7C3AED]" : "bg-white/[0.06]"
             }`}
           />
         )}
         <div
-          className={`w-3 h-3 rounded-full border-2 transition-colors duration-300 ${
+          className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
             isActive
-              ? "border-[#7C3AED] bg-[#7C3AED]"
-              : "border-slate-300 bg-white"
+              ? "bg-[#7C3AED] shadow-[0_0_12px_rgba(124,58,237,0.5)]"
+              : "bg-white/10"
           }`}
         />
         {index < chapters.length - 1 && (
           <div
-            className={`w-px h-6 transition-colors duration-300 ${
-              isActive ? "bg-[#7C3AED]" : "bg-slate-200"
+            className={`w-px h-6 transition-all duration-500 ${
+              isActive ? "bg-[#7C3AED]" : "bg-white/[0.06]"
             }`}
           />
         )}
       </div>
 
-      {/* Label */}
       <button
         type="button"
         onClick={() => {
@@ -230,8 +228,8 @@ function ProgressDot({
             block: "center",
           });
         }}
-        className={`text-sm font-medium transition-colors duration-300 text-left pt-px ${
-          isActive ? "text-[#7C3AED]" : "text-slate-400"
+        className={`text-sm font-medium transition-all duration-500 text-left pt-px ${
+          isActive ? "text-white" : "text-white/25"
         }`}
       >
         {chapter.title}
@@ -240,10 +238,6 @@ function ProgressDot({
   );
 }
 
-/**
- * Small hook that wraps framer-motion's useInView for a nullable element.
- * We create a stable ref object that holds the element passed in.
- */
 function useIsElementInView(el: HTMLDivElement | null): boolean {
   const ref = useRef<HTMLDivElement | null>(null);
   ref.current = el;
@@ -259,26 +253,24 @@ export default function ScrollStory() {
     offset: ["start end", "end start"],
   });
 
-  // Drive the progress line height based on scroll position
   const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section
       ref={sectionRef}
-      className="max-w-6xl mx-auto px-4 py-10 md:py-14"
+      className="max-w-6xl mx-auto px-4 py-16 md:py-20"
     >
-      {/* Section heading */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-10 md:mb-14"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center mb-12 md:mb-16"
       >
-        <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
+        <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
           De problema a solución, paso a paso
         </h2>
-        <p className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto">
+        <p className="text-sm md:text-base text-white/40 max-w-2xl mx-auto">
           Entérate cómo transformamos la operación de tu empresa con un enfoque
           práctico y resultados reales.
         </p>
@@ -286,12 +278,10 @@ export default function ScrollStory() {
 
       {/* Desktop layout */}
       <div className="hidden md:flex gap-10">
-        {/* Sticky left panel */}
         <div className="w-1/3">
           <div className="sticky top-28 space-y-2">
-            {/* Scroll-driven progress bar behind the dots */}
             <div className="relative">
-              <div className="absolute left-[5px] top-0 bottom-0 w-px bg-slate-200" />
+              <div className="absolute left-[5px] top-0 bottom-0 w-px bg-white/[0.06]" />
               <motion.div
                 className="absolute left-[5px] top-0 w-px bg-[#7C3AED] origin-top"
                 style={{ height: progressHeight }}
@@ -301,7 +291,6 @@ export default function ScrollStory() {
           </div>
         </div>
 
-        {/* Scrolling right panel */}
         <div className="w-2/3 space-y-12">
           {chapters.map((chapter, index) => (
             <div
@@ -316,14 +305,12 @@ export default function ScrollStory() {
         </div>
       </div>
 
-      {/* Mobile layout: simple vertical stack */}
+      {/* Mobile layout */}
       <div className="md:hidden space-y-8">
         {chapters.map((chapter, index) => (
           <div
             key={chapter.id}
             ref={(el) => {
-              // On mobile the same refs are used so ProgressNav still works
-              // if it were ever rendered, but here we only render the cards.
               chapterRefs.current[index] = el;
             }}
           >

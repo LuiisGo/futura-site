@@ -37,6 +37,7 @@ const allMobileLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,13 +50,25 @@ export default function Navbar() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 inset-x-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <header
+      className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0c0714]/80 backdrop-blur-2xl border-b border-white/[0.06]"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2">
           <div className="relative w-9 h-9">
             <Image
-              src="/logo-futura-gradient.png"
+              src="/Futurawhite.png"
               alt="FUTURA logo"
               fill
               sizes="36px"
@@ -63,10 +76,10 @@ export default function Navbar() {
             />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-lg font-semibold tracking-tight text-[#362263]">
+            <span className="text-lg font-semibold tracking-tight text-white">
               FUTURA
             </span>
-            <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500">
+            <span className="text-[10px] uppercase tracking-[0.15em] text-white/35">
               WORK LESS, LIVE MORE
             </span>
           </div>
@@ -78,7 +91,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-slate-700 hover:text-[#362263] transition-colors"
+              className="text-sm font-medium text-white/50 hover:text-white transition-colors"
             >
               {link.label}
             </Link>
@@ -88,7 +101,7 @@ export default function Navbar() {
           <div className="relative" ref={moreRef}>
             <button
               onClick={() => setMoreOpen((v) => !v)}
-              className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:text-[#362263] transition-colors"
+              className="inline-flex items-center gap-1 text-sm font-medium text-white/50 hover:text-white transition-colors"
             >
               Más
               <FiChevronDown
@@ -104,14 +117,14 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-2 rounded-xl border border-slate-200 bg-white shadow-lg min-w-[180px]"
+                  className="absolute right-0 top-full mt-2 rounded-xl liquid-glass-strong min-w-[180px] overflow-hidden"
                 >
                   {moreLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMoreOpen(false)}
-                      className="block py-2 px-4 text-sm font-medium text-slate-700 hover:text-[#362263] hover:bg-slate-50 transition-colors first:rounded-t-xl last:rounded-b-xl"
+                      className="block py-2.5 px-4 text-sm font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -121,63 +134,35 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          {/* Social icons (solo desktop) */}
-          <div className="hidden lg:flex items-center gap-2">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp FUTURA"
-              title="WhatsApp"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-            >
-              <Image
-                src="/whatsapp.png"
-                alt="WhatsApp"
-                width={18}
-                height={18}
-                className="object-contain"
-              />
-            </a>
-
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram FUTURA"
-              title="Instagram"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-            >
-              <Image
-                src="/logo-ig.png"
-                alt="Instagram"
-                width={18}
-                height={18}
-                className="object-contain"
-              />
-            </a>
-
-            <a
-              href={FACEBOOK_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook FUTURA"
-              title="Facebook"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-            >
-              <Image
-                src="/Fb-logo.png"
-                alt="Facebook"
-                width={18}
-                height={18}
-                className="object-contain"
-              />
-            </a>
+          {/* Social icons */}
+          <div className="hidden lg:flex items-center gap-1.5">
+            {[
+              { href: WHATSAPP_URL, src: "/whatsapp.png", alt: "WhatsApp" },
+              { href: INSTAGRAM_URL, src: "/logo-ig.png", alt: "Instagram" },
+              { href: FACEBOOK_URL, src: "/Fb-logo.png", alt: "Facebook" },
+            ].map((s) => (
+              <a
+                key={s.alt}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${s.alt} FUTURA`}
+                className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.08] transition-all"
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={16}
+                  height={16}
+                  className="object-contain"
+                />
+              </a>
+            ))}
           </div>
 
           <Link
             href="/contacto"
-            className="text-sm font-semibold px-4 py-2 rounded-full bg-[#362263] text-white hover:bg-[#2c1a50] transition-colors shadow-sm"
+            className="apple-btn text-sm font-semibold px-5 py-2 rounded-full bg-white text-[#0c0714]"
           >
             Agendar diagnóstico
           </Link>
@@ -186,7 +171,7 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden p-2 rounded-lg border border-slate-200 text-slate-700"
+          className="md:hidden p-2 rounded-lg border border-white/[0.08] text-white/70 hover:text-white transition-colors"
           aria-label="Abrir menú"
         >
           {open ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -194,30 +179,38 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile dropdown */}
-      {open && (
-        <div className="md:hidden border-t border-slate-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 py-3 space-y-2">
-            {allMobileLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block text-sm font-medium text-slate-700 py-2"
-              >
-                {link.label}
-              </Link>
-            ))}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden overflow-hidden border-t border-white/[0.06] bg-[#0c0714]/95 backdrop-blur-2xl"
+          >
+            <div className="max-w-6xl mx-auto px-4 py-4 space-y-1">
+              {allMobileLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block text-sm font-medium text-white/60 hover:text-white py-2.5 px-2 rounded-lg hover:bg-white/[0.04] transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-            <Link
-              href="/contacto"
-              onClick={() => setOpen(false)}
-              className="block text-sm font-semibold mt-2 px-4 py-2 rounded-full text-center bg-[#362263] text-white"
-            >
-              Agendar diagnóstico
-            </Link>
-          </div>
-        </div>
-      )}
+              <Link
+                href="/contacto"
+                onClick={() => setOpen(false)}
+                className="apple-btn-white block text-sm font-semibold mt-3 px-4 py-2.5 rounded-full text-center bg-white text-[#0c0714]"
+              >
+                Agendar diagnóstico
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -1,8 +1,5 @@
 "use client";
 
-// components/sections/CasosDeExito.tsx
-// → page.tsx: DESPUÉS de <SocialProofSection />, ANTES de <Sectors />
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
@@ -40,33 +37,42 @@ const casos = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 export default function CasosDeExito() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <section className="max-w-6xl mx-auto px-4 py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.45 }}
-        className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="liquid-glass rounded-3xl p-6 md:p-8"
       >
-        {/* Header — mismo patrón que SocialProofSection */}
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-2">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-white/30 mb-2">
               Resultados reales
             </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#362263] mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
               Empresas que ya operan diferente con FUTURA
             </h2>
-            <p className="text-sm md:text-base text-slate-600 max-w-2xl">
+            <p className="text-sm md:text-base text-white/40 max-w-2xl leading-relaxed">
               Casos concretos con números reales. No prometemos resultados
               genéricos — mostramos lo que ya construimos.
             </p>
           </div>
           <Link
             href="/contacto"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-200 transition-colors whitespace-nowrap"
+            className="apple-btn-ghost inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap"
           >
             Ver mi caso <FiArrowRight />
           </Link>
@@ -75,48 +81,53 @@ export default function CasosDeExito() {
         {/* Cards */}
         <div className="grid md:grid-cols-2 gap-4">
           {casos.map((caso, i) => (
-            <div
+            <motion.div
               key={i}
-              className="border border-slate-200 rounded-2xl p-6 bg-white flex flex-col gap-5"
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="liquid-glass-subtle rounded-2xl p-6 flex flex-col gap-5"
             >
               <div>
-                <span className="inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#362263]/10 text-[#362263] mb-3">
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/15 mb-3">
                   {caso.tag}
                 </span>
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-semibold text-white">
                   {caso.empresa}
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-white/30 mt-0.5">
                   {caso.sector} · {caso.detalle}
                 </p>
               </div>
 
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-white/30 mb-1.5">
                   El problema
                 </p>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-white/45 leading-relaxed">
                   {caso.problema}
                 </p>
               </div>
 
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-white/30 mb-1.5">
                   Lo que implementamos
                 </p>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-white/45 leading-relaxed">
                   {caso.solucion}
                 </p>
               </div>
 
-              <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-3">
+              <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-white/30 mb-3">
                   Resultados
                 </p>
                 <ul className="space-y-2">
                   {caso.resultados.map((r, j) => (
-                    <li key={j} className="flex gap-2 text-sm text-slate-700">
-                      <span className="mt-0.5 text-[#362263] flex-shrink-0">
+                    <li key={j} className="flex gap-2 text-sm text-white/60">
+                      <span className="mt-0.5 text-emerald-400 flex-shrink-0">
                         <FiCheck size={14} />
                       </span>
                       <span>{r}</span>
@@ -124,18 +135,18 @@ export default function CasosDeExito() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CTA footer */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 pt-5 border-t border-slate-100">
-          <p className="text-sm text-slate-500">
+        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-white/[0.06]">
+          <p className="text-sm text-white/35">
             ¿Tu empresa tiene procesos similares?
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center gap-2 rounded-full bg-[#362263] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#2c1a50] transition-colors"
+            className="apple-btn inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-6 py-2.5 text-sm font-semibold text-white"
           >
             Agendar diagnóstico gratuito <FiArrowRight />
           </Link>
