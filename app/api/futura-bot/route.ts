@@ -1,6 +1,8 @@
 // app/api/futura-bot/route.ts
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import { BotMessageSchema } from "@/lib/validations";
+import { isRateLimited, getClientIp } from "@/lib/rate-limit";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -231,34 +233,53 @@ RECORDATORIO GENERAL
   3) Termine agendando un diagnóstico o dejando sus datos de contacto.
 `;
 
-type IncomingChatMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as { messages?: IncomingChatMessage[] };
-
-    if (!body.messages || !Array.isArray(body.messages) || body.messages.length === 0) {
-      return NextResponse.json({ error: "Missing messages" }, { status: 400 });
+    // 1. Rate limiting — máximo 10 mensajes por IP cada 15 minutos
+    const ip = getClientIp(req);
+    if (isRateLimited(ip, { maxRequests: 10, windowMs: 15 * 60 * 1000 })) {
+      return NextResponse.json(
+        { error: "Demasiados mensajes. Intentá de nuevo en 15 minutos." },
+        { status: 429 }
+      );
     }
 
+    // 2. Verificar que la API key existe
     if (!process.env.OPENAI_API_KEY) {
-      console.error("Falta OPENAI_API_KEY");
-      return NextResponse.json({ error: "Config error" }, { status: 500 });
+      console.error("[futura-bot] OPENAI_API_KEY no configurada");
+      return NextResponse.json({ error: "Error de configuración" }, { status: 500 });
     }
 
+    // 3. Parsear body de forma segura
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
+    }
+
+    // 4. Validar con Zod
+    const result = BotMessageSchema.safeParse(rawBody);
+    if (!result.success) {
+      return NextResponse.json(
+        { error: "Input inválido", details: result.error.flatten().fieldErrors },
+        { status: 422 }
+      );
+    }
+
+    const { messages } = result.data;
+
+    // 5. Construir mensajes para OpenAI con el system prompt
     const chatMessages = [
       { role: "system" as const, content: SYSTEM_PROMPT },
-      ...body.messages.map((m) => ({
+      ...messages.map((m) => ({
         role: m.role,
         content: m.content,
       })),
     ];
 
     const completion = await client.chat.completions.create({
-      model: "gpt-4o",            // ⬅️ AQUÍ EL CAMBIO IMPORTANTE
+      model: "gpt-4o",
       messages: chatMessages,
       temperature: 0.5,
     });
@@ -268,13 +289,10 @@ export async function POST(req: Request) {
       "Perdón, tuve un problema al responder. Intenta de nuevo.";
 
     return NextResponse.json({ reply });
-  } catch (err: any) {
-    console.error("Error en /api/futura-bot:", err);
+  } catch (error) {
+    console.error("[futura-bot] Error inesperado:", error);
     return NextResponse.json(
-      {
-        error: "Server error",
-        details: err?.message || String(err),
-      },
+      { error: "Error interno del servidor" },
       { status: 500 }
     );
   }

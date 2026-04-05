@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
+import { ContactSchema } from "@/lib/validations";
 
 type FormState = {
   name: string;
@@ -11,6 +12,8 @@ type FormState = {
   sector: string;
   message: string;
 };
+
+type FieldErrors = Partial<Record<keyof FormState, string[]>>;
 
 const INITIAL_FORM: FormState = {
   name: "",
@@ -26,6 +29,7 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -38,6 +42,15 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("idle");
+    setFieldErrors({});
+
+    // Client-side Zod validation
+    const result = ContactSchema.safeParse(form);
+    if (!result.success) {
+      setFieldErrors(result.error.flatten().fieldErrors as FieldErrors);
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/contact", {
@@ -45,13 +58,7 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           source: "contact_page",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          company: form.company,
-          country: form.country,
-          sector: form.sector,
-          message: form.message,
+          ...result.data,
         }),
       });
 
@@ -59,7 +66,6 @@ export default function ContactForm() {
         throw new Error("Respuesta no OK");
       }
 
-      // Si todo salió bien, limpiamos el form y mostramos mensaje de éxito
       setForm(INITIAL_FORM);
       setStatus("ok");
     } catch (error) {
@@ -85,9 +91,10 @@ export default function ContactForm() {
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            className={`w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6] ${fieldErrors.name ? 'border-red-400' : 'border-slate-200'}`}
             placeholder="Tu Nombre"
           />
+          {fieldErrors.name && <p className="text-xs text-red-500 mt-1">{fieldErrors.name[0]}</p>}
         </div>
 
         <div>
@@ -100,9 +107,10 @@ export default function ContactForm() {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+            className={`w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6] ${fieldErrors.email ? 'border-red-400' : 'border-slate-200'}`}
             placeholder="tu@empresa.com"
           />
+          {fieldErrors.email && <p className="text-xs text-red-500 mt-1">{fieldErrors.email[0]}</p>}
         </div>
 
         <div>
@@ -178,9 +186,10 @@ export default function ContactForm() {
           value={form.message}
           onChange={handleChange}
           rows={4}
-          className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6]"
+          className={`w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6f4ff6] ${fieldErrors.message ? 'border-red-400' : 'border-slate-200'}`}
           placeholder="Por ejemplo: órdenes de compra, inventarios de bodegas, rutas de reparto, etc."
         />
+        {fieldErrors.message && <p className="text-xs text-red-500 mt-1">{fieldErrors.message[0]}</p>}
       </div>
 <div className="space-y-1">
   <p className="text-xs text-slate-500">
