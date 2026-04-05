@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronDown } from "react-icons/fi";
+import { faqSchema } from "@/lib/schema";
 
 const faqs = [
   {
@@ -34,6 +35,12 @@ const faqs = [
 export default function FAQ() {
   return (
     <section className="max-w-6xl mx-auto px-4 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema(faqs)),
+        }}
+      />
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}

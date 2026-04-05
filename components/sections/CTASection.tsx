@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export default function CTASection() {
   return (
@@ -43,7 +44,7 @@ export default function CTASection() {
             <p className="text-[11px] text-white/30 text-center md:text-left">
               ¿Prefieres WhatsApp? Escríbenos al{" "}
               <a
-                href="https://wa.me/50233813895"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="underline underline-offset-2 hover:text-white/50 transition-colors"

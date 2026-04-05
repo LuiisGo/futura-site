@@ -1,10 +1,30 @@
+import type { Metadata } from "next";
 import ContactForm from "../../components/common/ContactForm";
 import CTASection from "../../components/sections/CTASection";
 import Image from "next/image";
+import { breadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Contacto — Agendar Diagnóstico Gratuito",
+  description:
+    "Agendá un diagnóstico gratuito de 30–45 minutos con FUTURA. Revisamos tus procesos, identificamos quick wins y te proponemos un plan concreto de digitalización.",
+  alternates: { canonical: "https://futuratt.com/contacto" },
+};
 
 export default function ContactoPage() {
   return (
     <div className="pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", url: "https://futuratt.com" },
+              { name: "Contacto", url: "https://futuratt.com/contacto" },
+            ])
+          ),
+        }}
+      />
       <section className="max-w-5xl mx-auto px-4 pt-10 pb-8">
         <h1 className="text-3xl md:text-4xl font-semibold text-[#362263] mb-4">
           Hablemos de tu empresa

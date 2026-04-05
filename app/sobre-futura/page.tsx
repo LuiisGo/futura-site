@@ -1,6 +1,28 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { breadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Sobre FUTURA — Quiénes Somos",
+  description:
+    "FUTURA es una consultora de digitalización, automatización e inteligencia artificial aplicada para PYMEs en Guatemala y Centroamérica. Fundada por Luis Marroquín.",
+  alternates: { canonical: "https://futuratt.com/sobre-futura" },
+};
+
 export default function SobreFuturaPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 md:py-14 space-y-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", url: "https://futuratt.com" },
+              { name: "Sobre FUTURA", url: "https://futuratt.com/sobre-futura" },
+            ])
+          ),
+        }}
+      />
       <section className="space-y-3">
         <h1 className="text-3xl md:text-4xl font-semibold text-[#362263]">
           Sobre FUTURA
@@ -68,19 +90,30 @@ export default function SobreFuturaPage() {
           <h2 className="text-xl md:text-2xl font-semibold text-[#362263]">
             Quién está detrás
           </h2>
-          <p className="text-sm md:text-base text-slate-600">
-            FUTURA fue fundada por Luis Marroquín, apasionado por combinar
-            procesos operativos con tecnología accesible. Desde operar en
-            negocios familiares hasta construir soluciones de digitalización,
-            automatización e IA aplicada con Google Sheets, Apps Script, n8n y
-            herramientas nocode, Luis entiende tanto la parte técnica como la
-            realidad del día a día en planta, en la tienda y en la oficina.
-          </p>
-          <p className="text-sm md:text-base text-slate-600">
-            FUTURA se apoya en una red de colaboradores especializados en datos,
-            automatización, diseño de producto digital y estrategia, lo que nos
-            permite adaptarnos al tamaño y complejidad de cada proyecto.
-          </p>
+          <div className="flex flex-col sm:flex-row gap-4 items-start">
+            <Image
+              src="/roberto-marroquin.jpg"
+              alt="Luis Marroquín — Fundador de FUTURA"
+              width={120}
+              height={120}
+              className="rounded-2xl object-cover flex-shrink-0"
+            />
+            <div className="space-y-3">
+              <p className="text-sm md:text-base text-slate-600">
+                FUTURA fue fundada por Luis Marroquín, apasionado por combinar
+                procesos operativos con tecnología accesible. Desde operar en
+                negocios familiares hasta construir soluciones de digitalización,
+                automatización e IA aplicada con Google Sheets, Apps Script, n8n y
+                herramientas nocode, Luis entiende tanto la parte técnica como la
+                realidad del día a día en planta, en la tienda y en la oficina.
+              </p>
+              <p className="text-sm md:text-base text-slate-600">
+                FUTURA se apoya en una red de colaboradores especializados en datos,
+                automatización, diseño de producto digital y estrategia, lo que nos
+                permite adaptarnos al tamaño y complejidad de cada proyecto.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

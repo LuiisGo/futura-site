@@ -6,8 +6,9 @@ import { SiWhatsapp } from "react-icons/si";
 
 type Variant = "navbar" | "footer" | "contact";
 
-const WHATSAPP_URL =
-  "https://wa.me/50233813895?text=Hola%20FUTURA%21%20Quiero%20agendar%20un%20diagnostico%20gratuito%20%2830-45%20min%29.%20Cual%20es%20el%20siguiente%20paso%3F";
+import { WHATSAPP_MSG } from "@/lib/constants";
+
+const WHATSAPP_URL = WHATSAPP_MSG;
 
 const INSTAGRAM_URL =
   "https://www.instagram.com/futura.tt?igsh=MTU4eGc2azhuZzBtbA==";

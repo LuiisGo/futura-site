@@ -1,0 +1,5 @@
+export const CALENDAR_URL = 'https://calendar.app.google/BRzMZZZZmKSPYmqQA'
+export const WHATSAPP_URL = 'https://wa.me/50233813895'
+export const WHATSAPP_MSG = 'https://wa.me/50233813895?text=Hola%20FUTURA%21%20Quiero%20agendar%20un%20diagnostico%20gratuito%20%2830-45%20min%29.%20Cual%20es%20el%20siguiente%20paso%3F'
+export const TALLY_TERMOMETRO = 'https://tally.so/r/ZjNEb5'
+export const WALLET_DEMO = 'https://futura-wallet.onrender.com'

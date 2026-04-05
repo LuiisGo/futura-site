@@ -51,6 +51,12 @@ const services = [
       "Usamos modelos de inteligencia artificial para responder preguntas sobre tus procesos, resumir información clave, clasificar tickets y apoyar la toma de decisiones sobre tus datos operativos.",
     tags: ["IA", "Asistentes internos", "Clasificación automática"],
   },
+  {
+    title: "Aplicaciones web a medida",
+    description:
+      "Cuando Forms y Sheets se quedan cortos, construimos apps web a medida: PWAs offline-first, autenticación biométrica, dashboards personalizados. Ejemplo: sistema de control de inventario de combustible con análisis de varianza en tiempo real.",
+    tags: ["PWA", "Apps a medida", "Offline-first"],
+  },
 ];
 
 export default function Services() {

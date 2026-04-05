@@ -4,10 +4,18 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 
 function useCountUp(end: number, duration = 2000) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const hasAnimated = useRef(false);
+  const hasMounted = useRef(false);
+
+  useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      setCount(0);
+    }
+  }, []);
 
   const animate = useCallback(() => {
     if (hasAnimated.current) return;
@@ -23,7 +31,7 @@ function useCountUp(end: number, duration = 2000) {
   }, [end, duration]);
 
   useEffect(() => {
-    if (inView) animate();
+    if (inView && hasMounted.current) animate();
   }, [inView, animate]);
 
   return { count, ref };

@@ -22,6 +22,22 @@ const casos = [
     ],
   },
   {
+    empresa: "Agrícola San Antonio",
+    sector: "Agroindustria · Combustibles",
+    detalle: "2 tanques · múltiples proveedores · Guatemala",
+    tag: "App a medida",
+    problema:
+      "El control de entradas y salidas de combustible se hacía en papel. No había forma de detectar discrepancias entre lo entregado por proveedores y lo que realmente llegaba a los tanques. Sin trazabilidad ni evidencia fotográfica.",
+    solucion:
+      "PWA offline-first con autenticación biométrica para registro de entradas/salidas por tanque y proveedor. Evidencia fotográfica, análisis de varianza en tiempo real y exportación a Excel.",
+    resultados: [
+      "Registros en menos de 30 segundos desde el celular",
+      "Detección de discrepancias en tiempo real",
+      "Funciona offline y sincroniza automáticamente",
+      "Evidencia fotográfica de cada entrega",
+    ],
+  },
+  {
     empresa: "FUELDEPOT GT",
     sector: "Combustibles · B2B",
     detalle: "Guatemala",

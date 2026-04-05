@@ -1,9 +1,13 @@
 import Link from "next/link";
 
-export const metadata = {
-  title: "Seguridad y confidencialidad | FUTURA",
+import type { Metadata } from "next";
+import { breadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Seguridad y Confidencialidad",
   description:
-    "Cómo FUTURA maneja accesos, permisos, confidencialidad, respaldos y continuidad en proyectos de digitalización y automatización.",
+    "Cómo FUTURA maneja accesos, permisos, confidencialidad, respaldos y continuidad en proyectos de digitalización y automatización para PYMEs.",
+  alternates: { canonical: "https://futuratt.com/seguridad" },
 };
 
 function Section({ title, text }: { title: string; text: string }) {
@@ -18,6 +22,17 @@ function Section({ title, text }: { title: string; text: string }) {
 export default function SeguridadPage() {
   return (
     <main className="py-16 md:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Inicio", url: "https://futuratt.com" },
+              { name: "Seguridad", url: "https://futuratt.com/seguridad" },
+            ])
+          ),
+        }}
+      />
       <div className="mx-auto max-w-4xl px-4">
         <p className="text-xs tracking-[0.2em] uppercase text-slate-500">
           Confianza y control

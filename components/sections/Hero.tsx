@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FiArrowRight, FiMessageCircle, FiPlay } from "react-icons/fi";
 import Image from "next/image";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 /* ── Bilingual rotating phrases — cycles ES ↔ EN, never disappears ── */
 const phrases = [
@@ -81,8 +82,9 @@ export default function Hero() {
           </motion.span>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-            <span className="text-white">Tu PYME operando</span>
+            <span className="text-white">Digitalización y automatización</span>
             <br />
+            <span className="text-white">para tu PYME </span>
             <span className="relative inline-grid overflow-hidden" style={{ gridTemplateAreas: "'slot'" }}>
               {/* Invisible sizer — always renders the longest phrase to hold width */}
               <span className="invisible col-start-1 row-start-1 whitespace-nowrap" style={{ gridArea: "slot" }}>
@@ -110,8 +112,10 @@ export default function Hero() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="text-base md:text-lg text-white/50 max-w-lg mb-8 leading-relaxed"
           >
-            Digitalizamos y automatizamos tus formularios en papel, WhatsApp y
-            sistemas dispersos usando IA y herramientas nocode.
+            FUTURA digitaliza y automatiza la operación de PYMEs en Guatemala y
+            Centroamérica. Convertimos formularios en papel, WhatsApp y sistemas
+            dispersos en flujos digitales conectados usando IA, n8n y
+            herramientas nocode — sin ERP caro, con resultados en semanas.
           </motion.p>
 
           <motion.div
@@ -129,7 +133,7 @@ export default function Hero() {
             </Link>
 
             <a
-              href="https://wa.me/50233813895"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               className="apple-btn-ghost inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 text-sm font-medium text-white/80"

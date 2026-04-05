@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FiCheck, FiArrowRight } from "react-icons/fi";
+import { TALLY_TERMOMETRO } from "@/lib/constants";
 
 const bullets = [
   "Sin registro — respondé directo",
@@ -54,7 +55,7 @@ export default function TermometroSection() {
           {/* Right: Tally iframe */}
           <div className="w-full">
             <iframe
-              src="https://tally.so/r/ZjNEb5"
+              src={TALLY_TERMOMETRO}
               loading="lazy"
               width="100%"
               height="500"

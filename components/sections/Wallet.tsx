@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { WALLET_DEMO } from "@/lib/constants";
 
 function WalletDemoModal({ onClose }: { onClose: () => void }) {
   const [loaded, setLoaded] = useState(false);
@@ -54,7 +55,7 @@ function WalletDemoModal({ onClose }: { onClose: () => void }) {
               <div className="absolute inset-0 animate-pulse bg-white/5 h-[400px] md:h-[600px]" />
             )}
             <iframe
-              src="https://futura-wallet.onrender.com"
+              src={WALLET_DEMO}
               title="FUTURA Wallet Demo"
               className="w-full h-[400px] md:h-[600px]"
               onLoad={() => setLoaded(true)}
@@ -121,7 +122,7 @@ export default function Wallet() {
           <div className="space-y-3">
             <div className="overflow-hidden rounded-2xl liquid-glass-subtle relative">
               <iframe
-                src="https://futura-wallet.onrender.com"
+                src={WALLET_DEMO}
                 title="FUTURA Wallet Preview"
                 className="w-full h-[320px] pointer-events-none"
                 loading="lazy"
