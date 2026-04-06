@@ -76,6 +76,64 @@ const cases: CaseStudy[] = [
     metric: "~90% reducción en tiempo de registro vs. proceso manual en papel",
     datePublished: "2025-10-01",
   },
+  {
+    slug: "supesa-guatemala",
+    company: "SUPESA Guatemala",
+    sector: "Combustibles · B2B",
+    detail: "Guatemala",
+    tag: "Landing page + formularios",
+    problem:
+      "Necesitaban presencia digital profesional con formularios integrados para captar leads B2B de forma consistente en el competitivo mercado de combustibles guatemalteco, sin depender exclusivamente de referidos y contactos existentes.",
+    solution:
+      "Landing page B2B optimizada para conversión con formularios de captura conectados directamente al proceso comercial. Diseño enfocado en credibilidad institucional y generación de confianza para el segmento empresarial.",
+    results: [
+      "4 deals cerrados directamente desde la landing page",
+      "Canal de generación de leads B2B activo y medible",
+      "Presencia digital profesional en supesaguatemala.com",
+    ],
+    datePublished: "2025-11-01",
+  },
+  {
+    slug: "lecheria-san-antonio-leche",
+    company: "Lechería San Antonio",
+    sector: "Agroindustria · Lácteos",
+    detail: "Control de entradas/salidas de leche cruda · Guatemala",
+    tag: "App a medida",
+    problem:
+      "El registro de entradas y salidas de leche cruda se hacía en papel. No había trazabilidad de las entregas por proveedor, ni evidencia fotográfica. Las discrepancias entre lo recibido y lo registrado se detectaban tarde o nunca.",
+    solution:
+      "PWA offline-first (Next.js 14) con autenticación biométrica (WebAuthn/Face ID) para registro de entradas y salidas de leche por proveedor y tanque. Captura fotográfica de cada entrega, análisis de varianza automático entre volúmenes recibidos vs. mediciones reales, dashboards con Chart.js y exportación a Excel. Roles de admin y empleado con permisos diferenciados.",
+    results: [
+      "Registro de entregas en menos de 30 segundos desde el celular",
+      "Trazabilidad completa por proveedor, tanque, fecha y hora",
+      "Análisis de varianza automático (litros y porcentaje) entre entregas y existencias",
+      "Funciona offline con IndexedDB y sincroniza automáticamente",
+      "Evidencia fotográfica de cada recepción de leche",
+      "Exportación directa a Excel para reportes quincenales",
+    ],
+    metric: "De papel a digital: trazabilidad completa en tiempo real",
+    datePublished: "2025-12-01",
+  },
+  {
+    slug: "calculadora-lsa",
+    company: "Lechería San Antonio",
+    sector: "Agroindustria · Lácteos",
+    detail: "Calculadora de preservación de leche cruda · Guatemala",
+    tag: "App a medida",
+    problem:
+      "Los cálculos de preservación de leche cruda (dosis de peróxido de hidrógeno, enzima catalasa, tiempos y temperaturas) se hacían manualmente con tablas en papel. Los errores de dosificación podían arruinar lotes enteros de leche y los operarios en planta no tenían acceso a herramientas digitales.",
+    solution:
+      "Calculadora PWA con modelo cinético de degradación de H₂O₂ que soporta estrategias de 1, 2 o 3 dosis. Calcula dosificación de peróxido de hidrógeno según volumen, temperatura y concentración objetivo, dosificación de enzima catalasa con modelo de decaimiento exponencial, y timeline de enfriamiento por tanque con tasas específicas. Funciona offline con localStorage y sincroniza historial a Google Sheets.",
+    results: [
+      "Cálculos instantáneos en planta desde el celular",
+      "Estrategias de dosificación optimizadas (1, 2 o 3 dosis) con ahorro de insumos",
+      "Eliminación de errores de cálculo manual en dosis críticas",
+      "Funciona offline en áreas de planta sin cobertura",
+      "Historial completo de dosificaciones con exportación CSV",
+    ],
+    metric: "Cálculos que tomaban minutos con tablas ahora se hacen en segundos",
+    datePublished: "2025-12-15",
+  },
 ];
 
 function getCase(slug: string): CaseStudy | undefined {

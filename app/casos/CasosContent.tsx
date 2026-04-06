@@ -11,6 +11,7 @@ interface CaseStudy {
   company: string;
   sector: string;
   detail?: string;
+  slug: string;
   tag: string;
   problem: string;
   solution: string;
@@ -23,6 +24,7 @@ const cases: CaseStudy[] = [
     company: "Lechería San Antonio",
     sector: "Agroindustria · Lácteos",
     detail: "4 tiendas + bodega central · Guatemala",
+    slug: "lecheria-san-antonio",
     tag: "ERP-lite",
     problem:
       "Registraban entradas y salidas de inventario en papel en 5 puntos de operación. 15 horas/semana solo en registro manual.",
@@ -34,17 +36,79 @@ const cases: CaseStudy[] = [
       { label: "5 puntos de operación en un sistema" },
     ],
     quote:
-      "\u201cAntes tardábamos 15 horas a la semana. Ahora cada empleado llena un formulario en 30 segundos.\u201d",
+      "\u201cDe 15 horas semanales a 30 minutos. Ahora cada empleado registra desde el celular.\u201d",
+  },
+  {
+    company: "Lechería San Antonio",
+    sector: "Agroindustria · Lácteos",
+    detail: "Control de entradas/salidas de leche cruda · Guatemala",
+    slug: "lecheria-san-antonio-leche",
+    tag: "App a medida",
+    problem:
+      "El registro de entradas y salidas de leche cruda se hacía en papel. Sin trazabilidad ni evidencia fotográfica.",
+    solution: "PWA offline-first con autenticación biométrica y análisis de varianza",
+    results: [
+      { label: "Registro en <30 segundos" },
+      { label: "Trazabilidad completa" },
+      { label: "Funciona offline" },
+      { label: "Evidencia fotográfica" },
+    ],
+  },
+  {
+    company: "Lechería San Antonio",
+    sector: "Agroindustria · Lácteos",
+    detail: "Calculadora de preservación de leche cruda · Guatemala",
+    slug: "calculadora-lsa",
+    tag: "App a medida",
+    problem:
+      "Cálculos de preservación (H₂O₂, catalasa, temperaturas) se hacían con tablas en papel, propensos a errores.",
+    solution: "PWA con modelo cinético de degradación y estrategias de dosificación optimizadas",
+    results: [
+      { label: "Cálculos instantáneos en planta" },
+      { label: "Ahorro de insumos" },
+      { label: "Cero errores de dosificación" },
+      { label: "Funciona offline" },
+    ],
+  },
+  {
+    company: "Agrícola San Antonio",
+    sector: "Agroindustria · Combustibles",
+    detail: "2 tanques · múltiples proveedores · Guatemala",
+    slug: "agricola-san-antonio",
+    tag: "App a medida",
+    problem:
+      "Control de combustible en papel. Sin forma de detectar discrepancias entre entregas y existencias reales.",
+    solution: "PWA offline-first con autenticación biométrica y análisis de varianza en tiempo real",
+    results: [
+      { label: "Registro en <30 segundos" },
+      { label: "Detección de discrepancias" },
+      { label: "Funciona offline" },
+      { label: "Evidencia fotográfica" },
+    ],
   },
   {
     company: "FUELDEPOT GT",
     sector: "Combustibles · B2B",
+    slug: "fueldepot-gt",
     tag: "Landing page",
-    problem: "Sin presencia digital profesional",
-    solution: "Landing page B2B optimizada",
+    problem: "Sin presencia digital profesional para generar leads B2B.",
+    solution: "Landing page B2B optimizada para conversión",
     results: [
       { label: "3 deals cerrados desde la landing" },
       { label: "Canal de leads activo" },
+    ],
+  },
+  {
+    company: "SUPESA Guatemala",
+    sector: "Combustibles · B2B",
+    slug: "supesa-guatemala",
+    tag: "Landing + formularios",
+    problem: "Necesitaban presencia digital con formularios integrados para captar leads B2B en combustibles.",
+    solution: "Landing page B2B con formularios conectados al proceso comercial",
+    results: [
+      { label: "4 deals cerrados desde la landing" },
+      { label: "Canal de leads B2B activo" },
+      { label: "supesaguatemala.com" },
     ],
   },
 ];
@@ -70,7 +134,7 @@ export default function CasosContent() {
       <section className="max-w-4xl mx-auto px-4 py-16 space-y-12">
         {cases.map((c, i) => (
           <motion.article
-            key={c.company}
+            key={c.slug}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -145,6 +209,15 @@ export default function CasosContent() {
                   {c.quote}
                 </blockquote>
               )}
+
+              {/* Link */}
+              <Link
+                href={`/casos/${c.slug}`}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#a855f7] hover:text-[#c084fc] transition-colors mt-2"
+              >
+                Ver caso completo
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
             </div>
           </motion.article>
         ))}

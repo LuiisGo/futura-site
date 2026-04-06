@@ -11,14 +11,13 @@ const casos = [
     detalle: "4 tiendas + bodega central · Guatemala",
     tag: "ERP-lite",
     problema:
-      "Registraban entradas y salidas de inventario en papel en 5 puntos de operación. El dinero no cuadraba al cierre del día, no había visibilidad entre sucursales, y el proceso consumía 15 horas por semana solo en registro manual.",
+      "Registraban entradas y salidas de inventario en papel en 5 puntos de operación. 15 horas/semana solo en registro manual y el dinero no cuadraba.",
     solucion:
-      "ERP-lite con Google Forms y Sheets: cada empleado registra movimientos desde el celular en 30 segundos. El sistema consolida inventario por sucursal y bodega en tiempo real y genera la vista ejecutiva para gerencia.",
+      "ERP-lite con Google Forms y Sheets: cada empleado registra movimientos desde el celular en 30 segundos con vista ejecutiva en tiempo real.",
     resultados: [
-      "Tiempo de registro: de 15 horas/semana a menos de 30 minutos",
-      "El dinero cuadra exacto — se eliminaron las pérdidas por falta de control",
-      "Visibilidad de inventario por tienda y bodega en tiempo real",
-      "5 puntos de operación manejados desde un solo sistema",
+      "15h/semana → 30 minutos de registro",
+      "Dinero cuadra exacto al cierre del día",
+      "5 puntos de operación en un solo sistema",
     ],
   },
   {
@@ -27,28 +26,42 @@ const casos = [
     detalle: "2 tanques · múltiples proveedores · Guatemala",
     tag: "App a medida",
     problema:
-      "El control de entradas y salidas de combustible se hacía en papel. No había forma de detectar discrepancias entre lo entregado por proveedores y lo que realmente llegaba a los tanques. Sin trazabilidad ni evidencia fotográfica.",
+      "Control de combustible en papel. Sin trazabilidad ni forma de detectar discrepancias entre entregas y existencias.",
     solucion:
-      "PWA offline-first con autenticación biométrica para registro de entradas/salidas por tanque y proveedor. Evidencia fotográfica, análisis de varianza en tiempo real y exportación a Excel.",
+      "PWA offline-first con autenticación biométrica, análisis de varianza en tiempo real y evidencia fotográfica.",
     resultados: [
-      "Registros en menos de 30 segundos desde el celular",
-      "Detección de discrepancias en tiempo real",
-      "Funciona offline y sincroniza automáticamente",
-      "Evidencia fotográfica de cada entrega",
+      "Registro en <30 segundos desde el celular",
+      "Detección automática de discrepancias",
+      "Funciona offline y sincroniza solo",
     ],
   },
   {
-    empresa: "FUELDEPOT GT",
-    sector: "Combustibles · B2B",
-    detalle: "Guatemala",
-    tag: "Landing page",
+    empresa: "Lechería San Antonio",
+    sector: "Agroindustria · Lácteos",
+    detalle: "Calculadora de preservación · Guatemala",
+    tag: "App a medida",
     problema:
-      "Necesitaban presencia digital profesional para generar leads calificados de forma consistente, sin depender solo de referidos.",
+      "Cálculos de preservación de leche (H₂O₂, catalasa) con tablas en papel, propensos a errores que arruinaban lotes.",
     solucion:
-      "Landing page B2B optimizada para conversión con formulario de captura integrado a su proceso comercial.",
+      "PWA con modelo cinético de degradación y estrategias de dosificación optimizadas de 1, 2 o 3 dosis. Funciona offline en planta.",
     resultados: [
-      "3 deals cerrados directamente desde la landing page",
-      "Canal de generación de leads activo y medible desde el día 1",
+      "Cálculos instantáneos en planta",
+      "Ahorro de insumos con dosificación óptima",
+      "Cero errores de dosificación",
+    ],
+  },
+  {
+    empresa: "SUPESA Guatemala",
+    sector: "Combustibles · B2B",
+    detalle: "supesaguatemala.com",
+    tag: "Landing + formularios",
+    problema:
+      "Necesitaban presencia digital con formularios integrados para captar leads B2B en el mercado de combustibles.",
+    solucion:
+      "Landing page B2B con formularios de captura conectados al proceso comercial.",
+    resultados: [
+      "4 deals cerrados desde la landing",
+      "Canal de leads B2B activo y medible",
     ],
   },
 ];
@@ -156,10 +169,13 @@ export default function CasosDeExito() {
         </div>
 
         {/* CTA footer */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-white/[0.06]">
-          <p className="text-sm text-white/35">
-            ¿Tu empresa tiene procesos similares?
-          </p>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/[0.06]">
+          <Link
+            href="/casos"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#a855f7] hover:text-[#c084fc] transition-colors"
+          >
+            Ver todos los casos <FiArrowRight />
+          </Link>
           <Link
             href="/contacto"
             className="apple-btn inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-6 py-2.5 text-sm font-semibold text-white"

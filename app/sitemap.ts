@@ -134,6 +134,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/casos/supesa-guatemala`,
+      lastModified: today,
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/casos/lecheria-san-antonio-leche`,
+      lastModified: today,
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/casos/calculadora-lsa`,
+      lastModified: today,
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
     // Blog
     {
       url: `${baseUrl}/blog`,

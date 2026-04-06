@@ -38,6 +38,16 @@ export const sectors: SectorData[] = [
           'Sistema de control de inventario de combustible con PWA offline-first, autenticación biométrica y análisis de varianza en tiempo real. Evidencia fotográfica de cada entrega y exportación a Excel.',
       },
       {
+        title: 'Calculadora de preservacion en planta',
+        description:
+          'PWA offline que calcula dosis de conservantes (H₂O₂, catalasa), tiempos de almacenamiento y temperaturas optimas. Estrategias de 1, 2 o 3 dosis con modelo cinetico de degradacion. Usado en planta de Lecheria San Antonio.',
+      },
+      {
+        title: 'Control de entradas y salidas de leche',
+        description:
+          'PWA offline-first con autenticacion biometrica para registro de entregas de leche cruda por proveedor y tanque. Evidencia fotografica, analisis de varianza automatico y exportacion a Excel.',
+      },
+      {
         title: 'Automatización de cobranza por WhatsApp',
         description:
           'Flujos automáticos de seguimiento de facturas vencidas con notificaciones por WhatsApp, escalamiento y reporte de estatus diario al equipo de finanzas.',
@@ -48,12 +58,12 @@ export const sectors: SectorData[] = [
           'Tablero en tiempo real que cruza costos de producción, insumos y precios de venta para mostrar margen por producto, por cliente y por ruta de distribución.',
       },
     ],
-    tools: ['Google Sheets', 'Google Forms', 'n8n', 'WhatsApp', 'PWA offline-first'],
+    tools: ['Google Sheets', 'Google Forms', 'n8n', 'WhatsApp', 'PWA offline-first', 'WebAuthn/FIDO2', 'IndexedDB', 'Chart.js'],
     caseStudy: {
       company: 'Lecheria San Antonio y Agricola San Antonio',
       result:
-        'Tiempo de registro de inventario reducido de 15 horas/semana a menos de 30 minutos. Deteccion de discrepancias de combustible en tiempo real. 5 puntos de operacion manejados desde un solo sistema.',
-      link: '/casos',
+        'Tiempo de registro de inventario reducido de 15 horas/semana a menos de 30 minutos. Deteccion de discrepancias de combustible en tiempo real. 5 puntos de operacion manejados desde un solo sistema. Calculadora de preservacion de leche cruda con modelo cinetico de degradacion para dosificacion optima en planta. Sistema de entradas y salidas de leche cruda con trazabilidad completa por proveedor.',
+      link: '/casos/lecheria-san-antonio',
     },
     faq: [
       {
@@ -225,10 +235,10 @@ export const sectors: SectorData[] = [
     ],
     tools: ['PWA offline-first', 'n8n', 'Google Sheets', 'WhatsApp', 'Landing pages'],
     caseStudy: {
-      company: 'FUELDEPOT GT',
+      company: 'FUELDEPOT GT y SUPESA Guatemala',
       result:
-        '3 deals cerrados directamente desde la landing page. Canal de generacion de leads activo y medible desde el dia 1.',
-      link: '/casos',
+        '3 deals cerrados desde la landing de FUELDEPOT GT. 4 deals cerrados desde la landing de SUPESA Guatemala (supesaguatemala.com). Canal de generacion de leads B2B activo y medible. Control de combustible con PWA offline-first y analisis de varianza en tiempo real para Agricola San Antonio.',
+      link: '/casos/fueldepot-gt',
     },
     faq: [
       {
