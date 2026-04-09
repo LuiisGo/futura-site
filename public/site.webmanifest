@@ -1,0 +1,16 @@
+{
+  "name": "FUTURA",
+  "short_name": "FUTURA",
+  "description": "Digitalización y automatización para PYMEs en Guatemala",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0714",
+  "theme_color": "#7C3AED",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

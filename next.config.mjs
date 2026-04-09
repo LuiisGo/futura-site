@@ -3,6 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: false,
 
+  async redirects() {
+    return [
+      {
+        source: '/futura-vs-erp',
+        destination: '/blog/erp-vs-sistema-digital-pyme-guatemala',
+        permanent: true,
+      },
+    ]
+  },
+
   async headers() {
     // CSP directives — allow self + trusted external sources
     const cspDirectives = [

@@ -60,12 +60,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/futura-vs-erp`,
-      lastModified: today,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
     // Sector pages
     {
       url: `${baseUrl}/sectores/agroindustria`,
