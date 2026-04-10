@@ -124,13 +124,15 @@ export default function Hero() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="flex flex-wrap items-center gap-3 mb-8"
           >
-            <Link
-              href="/contacto"
+            <a
+              href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="apple-btn-white inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0c0714] text-sm font-semibold"
             >
               Agendar diagnóstico gratuito
               <FiArrowRight className="text-[#7C3AED]" />
-            </Link>
+            </a>
 
             <a
               href={WHATSAPP_URL}

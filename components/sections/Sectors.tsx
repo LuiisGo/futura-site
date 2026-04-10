@@ -2,32 +2,43 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const sectors = [
   {
     title: "Agroindustria y alimentos",
     description:
       "Procesos productivos diarios, lotes, trazabilidad, rutas de reparto, devoluciones, cobranzas y análisis de márgenes por cliente y producto.",
+    link: "/casos/lecheria-san-antonio",
+    linkLabel: "Ver caso",
   },
   {
     title: "Retail",
     description:
       "Inventarios por tienda, reposiciones automáticas, rotación, quiebres, precios y margen por categoría. Integración con FUTURA Wallet.",
+    link: "/blog/automatizacion-inventarios-retail-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Combustibles y flotas",
     description:
       "Flujos de cotización, órdenes, entregas, control de clientes, flotas, consumo y facturación. Panel claro de estado de cada cuenta.",
+    link: "/casos/fueldepot-gt",
+    linkLabel: "Ver caso",
   },
   {
     title: "Servicios técnicos y seguridad",
     description:
       "Tickets, activos con QR, agenda de mantenimiento preventivo, visitas técnicas y reportes fotográficos conectados a la base de datos.",
+    link: "/blog/automatizar-cotizaciones-b2b-empresa-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Industrial B2B",
     description:
       "Cotizaciones complejas, órdenes de compra, órdenes de producción, despachos y trazabilidad de proyectos o clientes.",
+    link: "/blog/digitalizar-proceso-ventas-distribuidora-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Otros sectores",
@@ -103,6 +114,14 @@ export default function Sectors() {
               <p className="text-xs md:text-sm text-white/40 leading-relaxed">
                 {s.description}
               </p>
+              {s.link && (
+                <Link
+                  href={s.link}
+                  className="inline-flex items-center gap-1 text-xs text-[#A2CEDC]/70 hover:text-[#A2CEDC] transition-colors mt-2"
+                >
+                  {s.linkLabel || "Leer más"} →
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>

@@ -73,12 +73,14 @@ export default function SeguridadPage() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-[#6f4ff6] px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-[#5a3ee0] transition-colors"
           >
             Agendar diagnóstico
-          </Link>
+          </a>
           <Link
             href="/"
             className="inline-flex items-center justify-center rounded-full bg-slate-100 px-6 py-2.5 text-sm font-medium text-slate-900 hover:bg-slate-200 transition-colors"

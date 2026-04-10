@@ -217,13 +217,15 @@ export default function SectorPage({ params }: Props) {
                 concreto.
               </p>
             </div>
-            <Link
-              href="/contacto"
+            <a
+              href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#0c0714] text-sm font-semibold shrink-0 hover:bg-white/90 transition-colors"
             >
               Agendar diagnostico
               <span aria-hidden="true">&rarr;</span>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

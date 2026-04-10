@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiArrowRight } from "react-icons/fi";
 import { faqSchema } from "@/lib/schema";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -54,6 +55,17 @@ export default function FAQ() {
           {faqs.map((item) => (
             <FAQItem key={item.q} {...item} />
           ))}
+        </div>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/[0.06]">
+          <p className="text-sm text-white/40">
+            Más preguntas y respuestas en nuestro blog
+          </p>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#a855f7] hover:text-[#c084fc] transition-colors"
+          >
+            Ir al blog <FiArrowRight />
+          </Link>
         </div>
       </motion.div>
     </section>

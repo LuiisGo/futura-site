@@ -5,7 +5,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Sobre FUTURA — Quiénes Somos",
   description:
-    "FUTURA es una consultora de digitalización, automatización e inteligencia artificial aplicada para PYMEs en Guatemala y Centroamérica. Fundada por Luis Marroquín.",
+    "FUTURA es una consultora de digitalización, automatización e inteligencia artificial aplicada para PYMEs en Guatemala y Centroamérica. Fundada por Roberto Marroquín.",
   alternates: { canonical: "https://futuratt.com/sobre-futura" },
 };
 
@@ -93,18 +93,18 @@ export default function SobreFuturaPage() {
           <div className="flex flex-col sm:flex-row gap-4 items-start">
             <Image
               src="/roberto-marroquin.jpg"
-              alt="Luis Marroquín — Fundador de FUTURA"
+              alt="Roberto Marroquín — Fundador de FUTURA"
               width={120}
               height={120}
               className="rounded-2xl object-cover flex-shrink-0"
             />
             <div className="space-y-3">
               <p className="text-sm md:text-base text-slate-600">
-                FUTURA fue fundada por Luis Marroquín, apasionado por combinar
+                FUTURA fue fundada por Roberto Marroquín, apasionado por combinar
                 procesos operativos con tecnología accesible. Desde operar en
                 negocios familiares hasta construir soluciones de digitalización,
                 automatización e IA aplicada con Google Sheets, Apps Script, n8n y
-                herramientas nocode, Luis entiende tanto la parte técnica como la
+                herramientas nocode, Roberto entiende tanto la parte técnica como la
                 realidad del día a día en planta, en la tienda y en la oficina.
               </p>
               <p className="text-sm md:text-base text-slate-600">

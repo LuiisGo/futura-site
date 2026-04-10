@@ -34,13 +34,15 @@ export default function CTASection() {
             </p>
           </div>
           <div className="flex flex-col gap-3 w-full md:w-auto shrink-0">
-            <Link
-              href="/contacto"
+            <a
+              href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="apple-btn-white inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#0c0714] text-sm font-semibold"
             >
               Agendar diagnóstico
               <FiArrowRight className="text-[#7C3AED]" />
-            </Link>
+            </a>
             <p className="text-[11px] text-white/30 text-center md:text-left">
               ¿Prefieres WhatsApp? Escríbenos al{" "}
               <a

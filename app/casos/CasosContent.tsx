@@ -61,7 +61,7 @@ const cases: CaseStudy[] = [
     slug: "calculadora-lsa",
     tag: "App a medida",
     problem:
-      "Cálculos de preservación (H₂O₂, catalasa, temperaturas) se hacían con tablas en papel, propensos a errores.",
+      "Cálculos de preservación (conservantes, tiempos, temperaturas) se hacían con tablas en papel, propensos a errores.",
     solution: "PWA con modelo cinético de degradación y estrategias de dosificación optimizadas",
     results: [
       { label: "Cálculos instantáneos en planta" },
@@ -236,12 +236,14 @@ export default function CasosContent() {
           <p className="text-white/60 mb-6">
             Contanos sobre tu operación y diseñamos una solución a tu medida.
           </p>
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold"
           >
             Agendar diagnóstico gratuito
-          </Link>
+          </a>
         </motion.div>
       </section>
     </div>

@@ -8,8 +8,10 @@ import {
   FiBarChart2,
   FiCreditCard,
   FiCpu,
+  FiArrowRight,
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
+import Link from "next/link";
 
 interface ServiceCard {
   title: string;
@@ -17,6 +19,8 @@ interface ServiceCard {
   tags: string[];
   icon: IconType;
   hero?: boolean;
+  link?: string;
+  linkLabel?: string;
 }
 
 const services: ServiceCard[] = [
@@ -27,6 +31,8 @@ const services: ServiceCard[] = [
     tags: ["Digitalización", "ERP-lite", "Listo para IA"],
     icon: FiDatabase,
     hero: true,
+    link: "/blog/erp-vs-sistema-digital-pyme-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Chatbots de WhatsApp con IA",
@@ -34,6 +40,8 @@ const services: ServiceCard[] = [
       "Bots con IA que entienden lenguaje natural, reciben fotos, aplican OCR y consultan tu base de conocimiento interna.",
     tags: ["IA", "WhatsApp", "OCR"],
     icon: FiMessageCircle,
+    link: "/blog/whatsapp-business-automatizacion-pymes-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Integraciones y RPA",
@@ -41,6 +49,8 @@ const services: ServiceCard[] = [
       "Conectamos facturación, inventarios, CRM, correo y otras herramientas para eliminar tareas manuales repetitivas.",
     tags: ["n8n", "APIs", "RPA"],
     icon: FiRefreshCw,
+    link: "/blog/que-es-n8n-automatizacion-pyme-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "Dashboards ejecutivos",
@@ -55,6 +65,8 @@ const services: ServiceCard[] = [
       "Sistema de puntos, cupones, gift cards y campañas con QR/NFC + WhatsApp. Mini CRM de recurrencia.",
     tags: ["Lealtad", "QR/NFC"],
     icon: FiCreditCard,
+    link: "/blog/programa-lealtad-digital-pymes-guatemala",
+    linkLabel: "Leer más",
   },
   {
     title: "IA aplicada a la operación",
@@ -62,6 +74,8 @@ const services: ServiceCard[] = [
       "Modelos de IA para responder preguntas, clasificar tickets y apoyar decisiones sobre tus datos operativos.",
     tags: ["Asistentes", "Clasificación"],
     icon: FiCpu,
+    link: "/blog/apps-web-medida-pymes-guatemala",
+    linkLabel: "Leer más",
   },
 ];
 
@@ -135,6 +149,14 @@ export default function BentoServices() {
                       </span>
                     ))}
                   </div>
+                  {s.link && (
+                    <Link
+                      href={s.link}
+                      className="inline-flex items-center gap-1 text-xs text-[#a855f7]/70 hover:text-[#c084fc] transition-colors mt-3"
+                    >
+                      {s.linkLabel || "Leer más"} <FiArrowRight size={12} />
+                    </Link>
+                  )}
                 </motion.div>
               );
             }
@@ -165,6 +187,14 @@ export default function BentoServices() {
                     </span>
                   ))}
                 </div>
+                {s.link && (
+                  <Link
+                    href={s.link}
+                    className="inline-flex items-center gap-1 text-xs text-[#a855f7]/70 hover:text-[#c084fc] transition-colors mt-3"
+                  >
+                    {s.linkLabel || "Leer más"} <FiArrowRight size={12} />
+                  </Link>
+                )}
               </motion.div>
             );
           })}

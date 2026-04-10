@@ -10,7 +10,7 @@ export function organizationSchema() {
     foundingDate: '2024',
     founder: {
       '@type': 'Person',
-      name: 'Luis Marroquín',
+      name: 'Roberto Marroquín',
       url: 'https://futuratt.com/sobre-futura',
     },
     areaServed: [

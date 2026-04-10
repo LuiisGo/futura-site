@@ -109,12 +109,14 @@ export default function TermometroContent() {
           <p className="text-white/60 mb-4">
             ¿Preferís hablar directamente con alguien del equipo?
           </p>
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold"
           >
             Agendar diagnóstico gratuito
-          </Link>
+          </a>
         </motion.div>
       </section>
     </div>

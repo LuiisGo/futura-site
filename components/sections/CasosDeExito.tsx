@@ -10,6 +10,7 @@ const casos = [
     sector: "Agroindustria · Lácteos",
     detalle: "4 tiendas + bodega central · Guatemala",
     tag: "ERP-lite",
+    slug: "lecheria-san-antonio",
     problema:
       "Registraban entradas y salidas de inventario en papel en 5 puntos de operación. 15 horas/semana solo en registro manual y el dinero no cuadraba.",
     solucion:
@@ -25,6 +26,7 @@ const casos = [
     sector: "Agroindustria · Combustibles",
     detalle: "2 tanques · múltiples proveedores · Guatemala",
     tag: "App a medida",
+    slug: "agricola-san-antonio",
     problema:
       "Control de combustible en papel. Sin trazabilidad ni forma de detectar discrepancias entre entregas y existencias.",
     solucion:
@@ -40,8 +42,9 @@ const casos = [
     sector: "Agroindustria · Lácteos",
     detalle: "Calculadora de preservación · Guatemala",
     tag: "App a medida",
+    slug: "calculadora-lsa",
     problema:
-      "Cálculos de preservación de leche (H₂O₂, catalasa) con tablas en papel, propensos a errores que arruinaban lotes.",
+      "Cálculos de preservación de leche (conservantes, tiempos, temperaturas) con tablas en papel, propensos a errores que arruinaban lotes.",
     solucion:
       "PWA con modelo cinético de degradación y estrategias de dosificación optimizadas de 1, 2 o 3 dosis. Funciona offline en planta.",
     resultados: [
@@ -55,6 +58,7 @@ const casos = [
     sector: "Combustibles · B2B",
     detalle: "supesaguatemala.com",
     tag: "Landing + formularios",
+    slug: "supesa-guatemala",
     problema:
       "Necesitaban presencia digital con formularios integrados para captar leads B2B en el mercado de combustibles.",
     solucion:
@@ -99,12 +103,14 @@ export default function CasosDeExito() {
               genéricos — mostramos lo que ya construimos.
             </p>
           </div>
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn-ghost inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap"
           >
             Ver mi caso <FiArrowRight />
-          </Link>
+          </a>
         </div>
 
         {/* Cards */}
@@ -164,6 +170,14 @@ export default function CasosDeExito() {
                   ))}
                 </ul>
               </div>
+              {caso.slug && (
+                <Link
+                  href={`/casos/${caso.slug}`}
+                  className="inline-flex items-center gap-1.5 text-sm text-[#a855f7]/70 hover:text-[#c084fc] transition-colors mt-auto"
+                >
+                  Ver caso completo <FiArrowRight size={14} />
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>
@@ -176,12 +190,14 @@ export default function CasosDeExito() {
           >
             Ver todos los casos <FiArrowRight />
           </Link>
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-6 py-2.5 text-sm font-semibold text-white"
           >
             Agendar diagnóstico gratuito <FiArrowRight />
-          </Link>
+          </a>
         </div>
       </motion.div>
     </section>

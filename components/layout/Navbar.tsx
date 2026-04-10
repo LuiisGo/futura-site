@@ -162,12 +162,14 @@ export default function Navbar() {
             ))}
           </div>
 
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn text-sm font-semibold px-5 py-2 rounded-full bg-white text-[#0c0714]"
           >
             Agendar diagnóstico
-          </Link>
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -202,13 +204,15 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link
-                href="/contacto"
+              <a
+                href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
                 className="apple-btn-white block text-sm font-semibold mt-3 px-4 py-2.5 rounded-full text-center bg-white text-[#0c0714]"
               >
                 Agendar diagnóstico
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}

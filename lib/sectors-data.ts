@@ -40,7 +40,7 @@ export const sectors: SectorData[] = [
       {
         title: 'Calculadora de preservacion en planta',
         description:
-          'PWA offline que calcula dosis de conservantes (H₂O₂, catalasa), tiempos de almacenamiento y temperaturas optimas. Estrategias de 1, 2 o 3 dosis con modelo cinetico de degradacion. Usado en planta de Lecheria San Antonio.',
+          'PWA offline que calcula dosis de conservantes, tiempos de almacenamiento y temperaturas optimas. Estrategias de 1, 2 o 3 dosis con modelo cinetico de degradacion. Usado en planta de Lecheria San Antonio.',
       },
       {
         title: 'Control de entradas y salidas de leche',

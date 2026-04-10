@@ -121,17 +121,17 @@ const cases: CaseStudy[] = [
     detail: "Calculadora de preservación de leche cruda · Guatemala",
     tag: "App a medida",
     problem:
-      "Los cálculos de preservación de leche cruda (dosis de peróxido de hidrógeno, enzima catalasa, tiempos y temperaturas) se hacían manualmente con tablas en papel. Los errores de dosificación podían arruinar lotes enteros de leche y los operarios en planta no tenían acceso a herramientas digitales.",
+      "Los cálculos de preservación de leche cruda (dosis de conservantes, tiempos y temperaturas) se hacían manualmente con tablas en papel. Los errores de dosificación podían arruinar lotes enteros de leche y los operarios en planta no tenían acceso a herramientas digitales.",
     solution:
-      "Calculadora PWA con modelo cinético de degradación de H₂O₂ que soporta estrategias de 1, 2 o 3 dosis. Calcula dosificación de peróxido de hidrógeno según volumen, temperatura y concentración objetivo, dosificación de enzima catalasa con modelo de decaimiento exponencial, y timeline de enfriamiento por tanque con tasas específicas. Funciona offline con localStorage y sincroniza historial a Google Sheets.",
+      "Calculadora PWA con modelo cinético de degradación que soporta estrategias de 1, 2 o 3 dosis. Calcula dosificación de conservantes según volumen, temperatura y concentración objetivo, con modelo de decaimiento exponencial y timeline de enfriamiento por tanque con tasas específicas. Funciona offline con localStorage y sincroniza historial a Google Sheets.",
     results: [
       "Cálculos instantáneos en planta desde el celular",
-      "Estrategias de dosificación optimizadas (1, 2 o 3 dosis) con ahorro de insumos",
+      "Estrategias de dosificación optimizadas (1, 2 o 3 dosis) con ~90% de ahorro en insumos",
       "Eliminación de errores de cálculo manual en dosis críticas",
       "Funciona offline en áreas de planta sin cobertura",
       "Historial completo de dosificaciones con exportación CSV",
     ],
-    metric: "Cálculos que tomaban minutos con tablas ahora se hacen en segundos",
+    metric: "~90% de ahorro en insumos y reducción en tiempo de cálculo",
     datePublished: "2025-12-15",
   },
 ];
@@ -315,12 +315,14 @@ export default function CasoPage({ params }: { params: { caso: string } }) {
               Contanos sobre tu operación y diseñamos una solución a tu medida
               con resultados concretos.
             </p>
-            <Link
-              href="/contacto"
+            <a
+              href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block px-8 py-3 rounded-full bg-[#7C3AED] text-white font-semibold hover:bg-[#6D28D9] transition-colors"
             >
               Agendar diagnóstico gratuito
-            </Link>
+            </a>
           </div>
         </section>
       </div>

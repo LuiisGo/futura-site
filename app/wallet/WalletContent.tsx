@@ -162,12 +162,14 @@ export default function WalletContent() {
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-btn inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold"
           >
             Agenda una demo personalizada
-          </Link>
+          </a>
         </motion.div>
       </section>
     </div>

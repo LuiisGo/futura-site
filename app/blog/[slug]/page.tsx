@@ -121,12 +121,14 @@ export default function BlogArticlePage({
             Agendá un diagnóstico gratuito de 30 minutos con el equipo de
             FUTURA.
           </p>
-          <Link
-            href="/contacto"
+          <a
+            href="https://calendar.app.google/6DiM3gfRCPkNrTfG8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-6 py-3 rounded-full bg-[#7C3AED] text-white font-semibold text-sm"
           >
             Agendar diagnóstico gratuito
-          </Link>
+          </a>
         </div>
       </div>
     </article>
