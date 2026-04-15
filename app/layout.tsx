@@ -71,10 +71,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://futuratt.com",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
   manifest: "/site.webmanifest",
 };
 
