@@ -107,7 +107,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-3RQ8K6MV86');
           `}
-        <head>
+        
     
         </Script>
         <Script id="meta-pixel" strategy="afterInteractive">
@@ -136,6 +136,6 @@ export default function RootLayout({
         </noscript>
       </body>
     </html>
-    </head>
+    
   );
 }
