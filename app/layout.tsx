@@ -1,3 +1,4 @@
+ 
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
@@ -8,6 +9,7 @@ import PageTransition from "../components/layout/PageTransition";
 import { organizationSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  
   metadataBase: new URL("https://futuratt.com"),
   title: {
     default:
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
+  },  
   openGraph: {
     type: "website",
     locale: "es_GT",
@@ -76,7 +78,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: {  
   children: React.ReactNode;
 }) {
   return (
@@ -105,8 +107,8 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-3RQ8K6MV86');
           `}
-       
-    <head>
+        <head>
+    
         </Script>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
@@ -134,6 +136,6 @@ export default function RootLayout({
         </noscript>
       </body>
     </html>
-    <head/>
+    </head>
   );
 }
