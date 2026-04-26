@@ -24,7 +24,7 @@ export function organizationSchema() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+502-47194684',
+      telephone: '+502-4719-4684',
       contactType: 'sales',
       availableLanguage: ['Spanish', 'English'],
     },

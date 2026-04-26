@@ -51,7 +51,7 @@ export default function CTASection() {
                 rel="noreferrer"
                 className="underline underline-offset-2 hover:text-white/50 transition-colors"
               >
-                +502 3381 3895
+                +502 4719 4684
               </a>
             </p>
           </div>
