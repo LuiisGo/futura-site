@@ -20,11 +20,11 @@ export function organizationSchema() {
     sameAs: [
       'https://www.instagram.com/futura.tt',
       'https://www.facebook.com/share/1Ej8WkoULm/',
-      'https://wa.me/50233813895',
+      'https://wa.me/50247194684',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+502-3381-3895',
+      telephone: '+502-47194684',
       contactType: 'sales',
       availableLanguage: ['Spanish', 'English'],
     },
