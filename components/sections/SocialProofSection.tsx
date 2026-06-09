@@ -22,7 +22,8 @@ const items = [
       "Optimizada para confianza y conversiones",
     ],
     icon: FiGlobe,
-    img: "/demo-erp.png",
+    img: "/images/futura-refresh/futura-dashboard-app-mockup.png",
+    alt: "Mockup de app interna y dashboard operativo creado por FUTURA para inventario, ventas, reportes y alertas de una PYME.",
     cta: { label: "Agendar demo", href: "/contacto" },
   },
   {
@@ -34,7 +35,8 @@ const items = [
       "Dashboards operativos",
     ],
     icon: FiZap,
-    img: "/demo-automation.png",
+    img: "/images/futura-refresh/futura-automation-flow-mockup.png",
+    alt: "Mockup de flujo automatizado por FUTURA que conecta WhatsApp, formularios, CRM, alertas y dashboard operativo.",
     cta: { label: "Agendar demo", href: "/contacto" },
   },
   {
@@ -46,7 +48,8 @@ const items = [
       "Secretaria virtual o vendedor estrella",
     ],
     icon: FiMessageCircle,
-    img: "/demo-bot.png",
+    img: "/images/futura-refresh/futura-whatsapp-bot-mockup.png",
+    alt: "Mockup de bot de WhatsApp con IA conectado a CRM, alertas y sistema interno para calificar leads y automatizar procesos.",
     cta: { label: "Agendar demo", href: "/contacto" },
   },
 ];
@@ -140,7 +143,7 @@ export default function Evidence() {
                 <div className="relative w-full h-44 bg-white/[0.02]">
                   <Image
                     src={it.img}
-                    alt={it.title}
+                    alt={it.alt}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"

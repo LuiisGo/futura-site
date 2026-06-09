@@ -26,11 +26,11 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsBar />
-      <ScrollStory />
       <BentoServices />
+      <CasosDeExito />
+      <ScrollStory />
       <Methodology />
       <SocialProofSection />
-      <CasosDeExito />
       <TermometroSection />
       <Sectors />
       <SecuritySection />

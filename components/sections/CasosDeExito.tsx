@@ -38,6 +38,21 @@ const casos = [
     ],
   },
   {
+    empresa: "FUELDEPOT GT",
+    sector: "Combustibles · B2B",
+    detalle: "Guatemala",
+    tag: "Landing + formularios",
+    slug: "fueldepot-gt",
+    problema:
+      "Necesitaban presencia digital profesional para generar leads calificados de forma consistente, sin depender solo de referidos.",
+    solucion:
+      "Landing page B2B optimizada para conversión con formulario de captura integrado a su proceso comercial.",
+    resultados: [
+      "3 deals cerrados directamente desde la landing",
+      "Canal de generación de leads activo y medible",
+    ],
+  },
+  {
     empresa: "Lechería San Antonio",
     sector: "Agroindustria · Lácteos",
     detalle: "Calculadora de preservación · Guatemala",
@@ -99,8 +114,8 @@ export default function CasosDeExito() {
               Empresas que ya operan diferente con FUTURA
             </h2>
             <p className="text-sm md:text-base text-white/40 max-w-2xl leading-relaxed">
-              Casos concretos con números reales. No prometemos resultados
-              genéricos — mostramos lo que ya construimos.
+              Sistemas, apps y portales reales con números concretos. No
+              prometemos resultados genéricos — mostramos lo que ya construimos.
             </p>
           </div>
           <a
@@ -117,7 +132,7 @@ export default function CasosDeExito() {
         <div className="grid md:grid-cols-2 gap-4">
           {casos.map((caso, i) => (
             <motion.div
-              key={i}
+              key={caso.slug}
               custom={i}
               variants={cardVariants}
               initial="hidden"

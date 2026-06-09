@@ -9,6 +9,7 @@ import {
   FiCreditCard,
   FiCpu,
   FiArrowRight,
+  FiGlobe,
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import Link from "next/link";
@@ -25,56 +26,65 @@ interface ServiceCard {
 
 const services: ServiceCard[] = [
   {
-    title: "Digitalización de procesos y ERP-lite",
+    title: "Apps internas a medida",
     description:
-      "Tomamos formularios en papel, checklists y reportes manuales y los convertimos en flujos digitales. Cuando hace sentido, lo organizamos en una capa tipo ERP-lite adaptada a tu empresa.",
-    tags: ["Digitalización", "ERP-lite", "Listo para IA"],
-    icon: FiDatabase,
+      "Construimos aplicaciones web simples para registrar ventas, inventarios, producción, rutas, evidencias y aprobaciones desde celular o escritorio.",
+    tags: ["Apps a medida", "Sistemas internos", "PWA"],
+    icon: FiCpu,
     hero: true,
+    link: "/blog/apps-web-medida-pymes-guatemala",
+    linkLabel: "Leer más",
+  },
+  {
+    title: "ERP-lite operativo",
+    description:
+      "Ordenamos formularios, checklists, inventarios y reportes manuales en una capa digital adaptada a tu empresa, sin la carga de un ERP tradicional.",
+    tags: ["Digitalización", "ERP-lite", "Procesos"],
+    icon: FiDatabase,
     link: "/blog/erp-vs-sistema-digital-pyme-guatemala",
-    linkLabel: "Leer más",
-  },
-  {
-    title: "Chatbots de WhatsApp con IA",
-    description:
-      "Bots con IA que entienden lenguaje natural, reciben fotos, aplican OCR y consultan tu base de conocimiento interna.",
-    tags: ["IA", "WhatsApp", "OCR"],
-    icon: FiMessageCircle,
-    link: "/blog/whatsapp-business-automatizacion-pymes-guatemala",
-    linkLabel: "Leer más",
-  },
-  {
-    title: "Integraciones y RPA",
-    description:
-      "Conectamos facturación, inventarios, CRM, correo y otras herramientas para eliminar tareas manuales repetitivas.",
-    tags: ["n8n", "APIs", "RPA"],
-    icon: FiRefreshCw,
-    link: "/blog/que-es-n8n-automatizacion-pyme-guatemala",
     linkLabel: "Leer más",
   },
   {
     title: "Dashboards ejecutivos",
     description:
-      "Tableros para dueños y gerentes con KPIs de ventas, márgenes, inventarios, rotación y cobranzas.",
-    tags: ["KPIs", "Data-driven"],
+      "Tableros para dueños y gerentes con KPIs de ventas, márgenes, inventarios, rotación, cobranzas y alertas operativas.",
+    tags: ["Dashboards", "KPIs", "Reportes"],
     icon: FiBarChart2,
+  },
+  {
+    title: "Automatizaciones con n8n / Make",
+    description:
+      "Conectamos facturación, inventarios, CRM, correo, Sheets y herramientas internas para eliminar copia/pega y seguimiento manual.",
+    tags: ["n8n", "Make", "APIs"],
+    icon: FiRefreshCw,
+    link: "/blog/que-es-n8n-automatizacion-pyme-guatemala",
+    linkLabel: "Leer más",
+  },
+  {
+    title: "Bots de WhatsApp con IA",
+    description:
+      "Flujos de WhatsApp para capturar pedidos, consultar disponibilidad, responder preguntas frecuentes y escalar casos al equipo humano.",
+    tags: ["WhatsApp", "IA aplicada", "OCR"],
+    icon: FiMessageCircle,
+    link: "/blog/whatsapp-business-automatizacion-pymes-guatemala",
+    linkLabel: "Leer más",
+  },
+  {
+    title: "Sitios web y portales",
+    description:
+      "Webs B2B, portales y formularios conectados al proceso comercial para que la presencia digital alimente la operación.",
+    tags: ["Portales", "Formularios", "Leads B2B"],
+    icon: FiGlobe,
+    link: "/casos/fueldepot-gt",
+    linkLabel: "Ver caso",
   },
   {
     title: "FUTURA Wallet",
     description:
-      "Sistema de puntos, cupones, gift cards y campañas con QR/NFC + WhatsApp. Mini CRM de recurrencia.",
-    tags: ["Lealtad", "QR/NFC"],
+      "Producto complementario para lealtad, puntos, cupones y campañas con QR/NFC + WhatsApp cuando la recurrencia del cliente es parte del problema.",
+    tags: ["Lealtad", "QR/NFC", "WhatsApp"],
     icon: FiCreditCard,
     link: "/blog/programa-lealtad-digital-pymes-guatemala",
-    linkLabel: "Leer más",
-  },
-  {
-    title: "IA aplicada a la operación",
-    description:
-      "Modelos de IA para responder preguntas, clasificar tickets y apoyar decisiones sobre tus datos operativos.",
-    tags: ["Asistentes", "Clasificación"],
-    icon: FiCpu,
-    link: "/blog/apps-web-medida-pymes-guatemala",
     linkLabel: "Leer más",
   },
 ];
@@ -106,8 +116,8 @@ export default function BentoServices() {
               Lo que hacemos en FUTURA
             </h2>
             <p className="text-sm md:text-base text-white/40 max-w-xl">
-              Sistemas concretos de digitalización, automatización e inteligencia
-              artificial aplicada para que tu operación funcione mejor.
+              Apps, sistemas internos, dashboards y automatizaciones que ordenan
+              procesos reales sin obligarte a comprar un software gigante.
             </p>
           </div>
         </div>

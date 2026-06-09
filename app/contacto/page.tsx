@@ -41,10 +41,10 @@ export default function ContactoPage() {
           <div className="hidden md:block">
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
               <Image
-                src="/illu-mobile-chatbot.jpg"
-                alt="Chatbot de FUTURA agendando reuniones"
-                width={640}
-                height={800}
+                src="/images/futura-refresh/futura-diagnostic-contact-mockup.png"
+                alt="Mockup de diagnóstico operativo de FUTURA con análisis de empresa, problemas, tiempo perdido y sistema recomendado."
+                width={1484}
+                height={1060}
                 className="w-full h-full object-cover"
               />
             </div>

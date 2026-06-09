@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       "Digitalizamos y automatizamos la operación de tu PYME. ERP-lite, WhatsApp bots, dashboards y automatizaciones con n8n. Guatemala y Centroamérica.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/futura-refresh/futura-og-image-1200x630.png",
         width: 1200,
         height: 630,
         alt: "FUTURA — Digitalización y Automatización para PYMEs en Guatemala",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     title: "FUTURA | Digitalización y Automatización para PYMEs en Guatemala",
     description:
       "Digitalizamos y automatizamos la operación de tu PYME. Diagnóstico gratis.",
-    images: ["/og-image.png"],
+    images: ["/images/futura-refresh/futura-og-image-1200x630.png"],
   },
   alternates: {
     canonical: "https://futuratt.com",

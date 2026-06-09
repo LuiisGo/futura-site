@@ -77,7 +77,9 @@ export function articleSchema(options: {
     url: options.url,
     datePublished: options.datePublished,
     dateModified: options.dateModified ?? options.datePublished,
-    image: options.image ?? 'https://futuratt.com/og-image.png',
+    image:
+      options.image ??
+      'https://futuratt.com/images/futura-refresh/futura-og-image-1200x630.png',
     author: {
       '@type': 'Organization',
       name: 'FUTURA',
